@@ -1,17 +1,39 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Home - My Portfolio"
+  description="Welcome to my portfolio website showcasing my work and projects"
+  keywords="portfolio, web development, projects"
+>
+  <!-- Optional Header -->
+
+  <!-- Main Content -->
+  <section
+    class="h-screen min-h-screen w-full bg-stone-800 flex flex-col items-center justify-start px-4"
+  >
+    <div class="h-1/6 "/>
+    <div class="text-center ">
+      <h1
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl text-neutral-50 font-medium italic font-raleway tracking-tight"
+      >
+        Oscar Gizatulin
+      </h1>
+      <div class="relative">
+        <p
+          class="text-lg sm:text-xl text-neutral-50 max-w-2xl mx-auto tracking-wide font-lato"
+        >
+          Welcome to my portfolio. Explore my work and get in touch.
+        </p>
+        <img
+          src="/images/Laptop.png"
+          alt="Laptop illustration"
+          class="mx-auto w-196 absolute inset-x-0 -bottom-56"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Optional Footer -->
+</Layout>

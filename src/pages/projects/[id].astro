@@ -1,0 +1,50 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SbsProject from "../../components/projects/SbsProject.astro";
+import RdProject from "../../components/projects/RdProject.astro";
+import ProjectNotFound from "../../components/projects/ProjectNotFound.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { id: 'sbs' } },
+    { params: { id: 'rd' } }
+  ];
+}
+
+const { id } = Astro.params;
+
+// Component mapping for each project
+const projectComponents: Record<string, any> = {
+  'sbs': SbsProject,
+  'rd': RdProject
+};
+
+// Project metadata for SEO
+const projectMetadata: Record<string, { title: string; description: string; keywords: string }> = {
+  'sbs': {
+    title: 'Side by Side — Tabletop RPG Website - Oscar Gizatulin Portfolio',
+    description: 'A promotional website for a Latvia-made tabletop RPG system, featuring interactive gameplay demos, scroll-driven storytelling, and markdown-based content management',
+    keywords: 'Side by Side, Tabletop RPG, Next.js, React, Locomotive Scroll, Framer Motion, portfolio'
+  },
+  'rd': {
+    title: 'Resistance Diary - Oscar Gizatulin Portfolio',
+    description: 'A progressive overload training tracker PWA built with React 19, TypeScript, Zustand, and Framer Motion',
+    keywords: 'Resistance Diary, Training Tracker, PWA, React 19, TypeScript, Zustand, Tailwind CSS, portfolio'
+  }
+};
+
+const ProjectComponent = projectComponents[id!];
+const metadata = projectMetadata[id!];
+const isValidProject = !!ProjectComponent;
+
+// Fallback to ProjectNotFound for invalid IDs
+const Component = isValidProject ? ProjectComponent : ProjectNotFound;
+---
+
+<Layout
+  title={isValidProject ? metadata.title : 'Project Not Found - Oscar Gizatulin Portfolio'}
+  description={isValidProject ? metadata.description : 'The project you are looking for does not exist.'}
+  keywords={isValidProject ? metadata.keywords : 'portfolio, projects'}
+>
+  <Component />
+</Layout>

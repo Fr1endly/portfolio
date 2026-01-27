@@ -3,6 +3,12 @@
 @theme {
   --font-family-lato: "Lato", sans-serif;
   --font-family-raleway: "Raleway", sans-serif;
+
+  --animation-float: float 5s ease-in-out infinite;
+  --animation-float-slow: floatSlow 7s ease-in-out infinite;
+
+  /* Custom spacing for image sizes */
+  --spacing-100: 25rem;
 }
 
 /* Lato Font */
@@ -90,3 +96,188 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Floating Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+@keyframes moveInCircleReverse {
+  0% {
+    transform: rotate(0deg) translateX(80px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg) translateX(80px) rotate(360deg);
+  }
+}
+
+@keyframes moveVertical {
+  0%,
+  100% {
+    transform: translateY(-40px);
+  }
+  50% {
+    transform: translateY(40px);
+  }
+}
+
+@keyframes moveDiagonal {
+  0%,
+  100% {
+    transform: translateY(150px) translateX(-150px);
+  }
+  50% {
+    transform: translateY(-180px) translateX(180px);
+  }
+}
+
+@keyframes moveHorizontal {
+  0%,
+  100% {
+    transform: translateX(-40px) translateY(-20px);
+  }
+  50% {
+    transform: translateX(40px) translateY(20px);
+  }
+}
+
+@layer utilities {
+  .floating {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .floating-slow {
+    animation: floatSlow 4s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+
+
+  .gradient-bg {
+    @apply w-screen h-screen relative overflow-hidden;
+    top: 0;
+    left: 0;
+    background: linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82));
+  }
+
+  .gradient-bg svg {
+    @apply fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+@layer components {
+  .blob {
+    @apply absolute mix-blend-hard-light opacity-100;
+  }
+
+  .blob--g1 {
+    @apply w-[80%] h-[80%];
+    background: radial-gradient(
+        circle at center,
+        rgba(18, 113, 255, 0.8) 0,
+        rgba(18, 113, 255, 0) 50%
+      )
+      no-repeat;
+    top: calc(50% - 35%);
+    left: calc(50% - 35%);
+    transform-origin: center center;
+    animation: moveInCircle 15s ease infinite;
+  }
+
+  .blob--g2 {
+    @apply w-[80%] h-[80%];
+    background: radial-gradient(
+        circle at center,
+        rgba(221, 74, 255, 0.8) 0,
+        rgba(221, 74, 255, 0) 50%
+      )
+      no-repeat;
+    top: calc(50% - 45%);
+    left: calc(50% - 45%);
+    transform-origin: calc(50% - 400px);
+    animation: moveInCircleReverse 10s reverse infinite;
+  }
+
+  .blob--g3 {
+    @apply w-[40%] h-[40%];
+    background: radial-gradient(
+        circle at center,
+        rgba(100, 220, 255, 0.8) 0,
+        rgba(100, 220, 255, 0) 50%
+      )
+      no-repeat;
+    top: calc(50% - 20%);
+    left: calc(50% - 20%);
+    transform-origin: calc(50% + 400px);
+    animation: moveDiagonal 14s ease infinite;
+  }
+
+  .blob--g4 {
+    @apply w-[80%] h-[80%];
+    background: radial-gradient(
+        circle at center,
+        rgba(200, 50, 50, 0.8) 0,
+        rgba(200, 50, 50, 0) 50%
+      )
+      no-repeat;
+    top: calc(50% - 40%);
+    left: calc(50% - 40%);
+    transform-origin: calc(50% - 200px);
+    animation: moveHorizontal 40s ease infinite;
+    opacity: 0.7;
+  }
+
+  .blob--g5 {
+    @apply w-[80%] h-[80%];
+    background: radial-gradient(
+        circle at center,
+        rgba(50, 184, 20, 0.8) 0,
+        rgba(180, 180, 50, 0) 50%
+      )
+      no-repeat;
+    top: calc(50% - 80%);
+    left: calc(50% - 80%);
+    transform-origin: calc(50% - 800px) calc(50% + 200px);
+    animation: moveInCircle 14s ease infinite;
+  }
+
+  .blob--interactive {
+    @apply w-[75%] h-[75%];
+    background: radial-gradient(
+        circle at center,
+        rgba(225, 229, 18, 0.856),
+        rgba(140, 100, 255, 0) 50%
+      )
+      no-repeat;
+    top: 50%;
+    left: 50%;
+    opacity: 0.7;
+  }
+}

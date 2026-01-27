@@ -1,0 +1,145 @@
+---
+const { className = "" } = Astro.props;
+---
+
+<div
+  class={`relative w-full h-screen overflow-hidden ${className}`}
+  style="isolation: isolate;"
+>
+  <!-- Layer 1: Animated Gradient Background -->
+  <div
+    id="layer-1"
+    class="absolute inset-0 bg-[linear-gradient(40deg,rgb(108,0,162),rgb(0,17,82))]"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="fixed inset-0 w-0 h-0">
+      <defs>
+        <filter id="goo-image">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"
+          ></feGaussianBlur>
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+            result="goo"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo"></feBlend>
+        </filter>
+      </defs>
+    </svg>
+    <div class="w-full h-full filter-[url(#goo-image)_blur(40px)]">
+      <div class="blob blob--g1"></div>
+      <div class="blob blob--g2"></div>
+      <div class="blob blob--g3"></div>
+      <div class="blob blob--interactive"></div>
+    </div>
+  </div>
+
+  <!-- Layer 2: Image Cutout Effect (with blend mode) -->
+  <div id="layer-2" class="absolute inset-0 bg-stone-950/95 mix-blend-multiply">
+    <div id="images-container" class="relative inset-x-0 w-full h-full">
+      <img
+        src="/images/sticky_notes.png"
+        alt="Sticky notes illustration"
+        class="absolute max-w-none w-55 floating top-[38%] left-[32%]"
+      />
+      <img
+        src="/images/Laptop.png"
+        alt="Laptop illustration"
+        class="absolute max-w-none w-110 top-[50%] left-[47%]"
+        style="transform: translate(-50%, -50%);"
+      />
+      <img
+        src="/images/coffee.png"
+        alt="Coffee illustration"
+        class="absolute max-w-none w-34 floating-slow top-[44%] left-[56%]"
+      />
+    </div>
+  </div>
+
+  <!-- Layer 3: Text Content (no blend mode - normal colors) -->
+  <div
+    id="layer-3"
+    class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none"
+  >
+    <div class="pointer-events-auto">
+      <h1
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-neutral-50 font-light uppercase font-raleway tracking-tight"
+      >
+        Oscar Gizatulin
+      </h1>
+      <p
+        class="pl-1 text-lg sm:text-xl text-neutral-50 max-w-2xl tracking-wide font-lato"
+      >
+        Welcome to my portfolio. Explore my work and get in touch.
+      </p>
+    </div>
+    <div class="h-[350px] w-full"/>
+  </div>
+  <img src="/images/arrow.svg" alt="" aria-hidden="true" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-8 h-8 animate-bounce pointer-events-none" />
+</div>
+
+<script>
+  // Interactive gradient bubble constants
+  const MAX_BUBBLE_RADIUS = 300;
+  const BUBBLE_EASE_FACTOR = 20;
+  const MOVEMENT_THRESHOLD = 0.1;
+
+  const interBubble =
+    document.querySelector<HTMLDivElement>(".blob--interactive");
+
+  if (interBubble) {
+    let curX = 0;
+    let curY = 0;
+    let tgX = 0;
+    let tgY = 0;
+
+    // The blob is 75% of viewport and positioned at top:50%, left:50%
+    // To center it visually, we need to offset by half its size
+    function getBlobOffset() {
+      return {
+        x: -window.innerWidth * 0.375,
+        y: -window.innerHeight * 0.375
+      };
+    }
+
+    function move() {
+      const dx = tgX - curX;
+      const dy = tgY - curY;
+
+      // Only update transform if there's meaningful movement
+      if (Math.abs(dx) > MOVEMENT_THRESHOLD || Math.abs(dy) > MOVEMENT_THRESHOLD) {
+        curX += dx / BUBBLE_EASE_FACTOR;
+        curY += dy / BUBBLE_EASE_FACTOR;
+        const offset = getBlobOffset();
+        interBubble!.style.transform = `translate(${Math.round(curX + offset.x)}px, ${Math.round(curY + offset.y)}px)`;
+      }
+      requestAnimationFrame(move);
+    }
+
+    window.addEventListener("mousemove", (event) => {
+      // Get center of the viewport
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      // Calculate mouse position relative to center
+      const deltaX = event.clientX - centerX;
+      const deltaY = event.clientY - centerY;
+
+      // Calculate distance from center
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+      // Constrain to radius (use relative coordinates)
+      if (distance > MAX_BUBBLE_RADIUS) {
+        // Normalize and scale to max radius
+        const angle = Math.atan2(deltaY, deltaX);
+        tgX = Math.cos(angle) * MAX_BUBBLE_RADIUS;
+        tgY = Math.sin(angle) * MAX_BUBBLE_RADIUS;
+      } else {
+        // Use offset from center, not absolute position
+        tgX = deltaX;
+        tgY = deltaY;
+      }
+    });
+
+    move();
+  }
+</script>

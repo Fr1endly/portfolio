@@ -1,49 +1,368 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout
-  title="Home - My Portfolio"
-  description="Welcome to my portfolio website showcasing my work and projects"
-  keywords="portfolio, web development, projects"
+  title="Oscar Gizatulin - Portfolio"
+  description="Welcome to my portfolio. Explore my projects and creative work featuring modern web design and interactive animations."
+  keywords="portfolio, web developer, web design, creative projects, interactive design"
 >
-  <!-- Optional Header -->
+  <!-- Sticky Hero: Stays at top during scroll -->
+  <div class="sticky top-0 h-screen z-10">
+    <HeroSection />
+  </div>
 
-  <!-- Main Content -->
+  <!-- Second Section: Slides up over hero -->
   <section
-    class="h-screen min-h-screen w-full bg-stone-800 flex flex-col items-center justify-start px-4"
+    class="relative w-full h-screen min-h-screen bg-stone-900 z-20 mt-[100vh] pt-8 pb-0 px-6"
   >
-    <div class="h-1/6"></div>
-    <div class="text-center">
-      <div class="relative">
-        <h1
-          class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl text-neutral-50 font-medium italic font-raleway tracking-tight"
-        >
-          Oscar Gizatulin
-        </h1>
-        <p
-          class="text-lg sm:text-xl text-neutral-50 max-w-2xl mx-auto tracking-wide font-lato"
-        >
-          Welcome to my portfolio. Explore my work and get in touch.
-        </p>
-        <img
-          src="/images/sticky_notes.png"
-          alt="Sticky notes illustration"
-          class="mx-auto w-140 absolute right-30 -bottom-58"
-        />
-        <img
-          src="/images/Laptop.png"
-          alt="Laptop illustration"
-          class="mx-auto w-230 absolute inset-x-0 -bottom-56"
-        />
-        <img
-          src="/images/coffe.png"
-          alt="Sticky notes illustration"
-          class="mx-auto w-100 absolute left-50 -bottom-56"
-        />
+    <!-- Vertical Label -->
+    <div
+      class="absolute left-1/5 top-2/3 -translate-y-1/2 text-stone-400 font-raleway font-extralight text-6xl tracking-wider rotate-180"
+      style="writing-mode: vertical-lr; text-orientation: sideways;"
+    >
+      PROJECTS
+    </div>
+
+    <div class="w-full h-full flex flex-col justify-center items-center pt-20">
+      <!-- Section Header -->
+      <div class="w-full flex justify-center">
+        <div class="relative text-neutral-50 max-w-80 text-justify my-20">
+          Let's push boundaries and create digital experiences that leave a
+          lasting impression. Get in touch and let's build something
+          extraordinary.
+          <!-- Decorative Corner -->
+          <div
+            class="absolute w-10 h-10 -left-10 -bottom-10 border-white border-b-2 border-l-2 rounded-sm"
+            aria-hidden="true"
+          >
+          </div>
+        </div>
+      </div>
+      <div class="w-full h-full flex justify-end items-end">
+        <!-- Projects Carousel -->
+        <div class="relative max-w-3/5 -mx-6 w-full">
+          <h2
+            class="text-lg md:text-3xl font-semibold text-stone-100 font-raleway py-4 pl-24 w-full"
+          >
+            click and drag
+          </h2>
+
+          <!-- Decorative Corner -->
+          <div
+            class="absolute w-10 h-10 -left-10 top-0 border-white border-t-4 border-l-4 rounded-sm"
+            aria-hidden="true"
+          >
+          </div>
+          <!-- Scroll Container -->
+          <div
+            id="carousel"
+            class="flex justify-end overflow-x-auto gap-8 px-6 pb-8 snap-x snap-mandatory scroll-smooth"
+            style="scrollbar-width: none; -ms-overflow-style: none;"
+          >
+            <ProjectCard
+              title="DESIGN & DEVELOPMENT<br>FOR roleplaying<br>GAME"
+              imageUrl="/images/sbs.png"
+              imageAlt="Online Store Project"
+              number="01"
+              variant="white"
+            />
+
+            <ProjectCard
+              title="DESIGN & DEVELOPMENT<br>FOR training <br>APP"
+              imageUrl="/images/rd.png"
+              imageAlt="Jewelry Store Project"
+              number="02"
+              variant="black"
+            />
+          </div>
+
+          <!-- Navigation Arrows -->
+          <button
+            id="prev-btn"
+            class="absolute left-0 top-1/2 -translate-y-1/2 bg-stone-800/80 hover:bg-stone-700 text-stone-100 p-3 rounded-full backdrop-blur-sm border border-stone-700/50 transition-all duration-300 z-10 opacity-0 pointer-events-none"
+            aria-label="Previous projects"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button
+            id="next-btn"
+            class="absolute right-0 top-1/2 -translate-y-1/2 bg-stone-800/80 hover:bg-stone-700 text-stone-100 p-3 rounded-full backdrop-blur-sm border border-stone-700/50 transition-all duration-300 z-10"
+            aria-label="Next projects"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Optional Footer -->
+    <!-- Footer -->
+    <Footer />
+  </section>
 </Layout>
+
+<style>
+  /* Hide scrollbar for carousel */
+  #carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Show navigation buttons on hover */
+  .relative:hover #prev-btn,
+  .relative:hover #next-btn {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Cursor styles for drag */
+  #carousel {
+    cursor: grab;
+    user-select: none;
+  }
+
+  #carousel.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto !important;
+    scroll-snap-type: none !important;
+  }
+
+  #carousel.dragging * {
+    pointer-events: none;
+  }
+
+  #carousel * {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+</style>
+
+<script>
+  // Carousel constants
+  const CARD_GAP = 24; // gap-8 = 2rem = 32px (but we use 24 for nav scroll)
+  const SCROLL_THRESHOLD = 10;
+  const DRAG_CLICK_THRESHOLD = 5;
+  const MOMENTUM_MULTIPLIER = 300;
+  const FRICTION = 0.92;
+  const MIN_VELOCITY = 0.1;
+  const MIN_MOMENTUM = 0.5;
+
+  const carousel = document.getElementById("carousel");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+
+  if (carousel && prevBtn && nextBtn) {
+    // Navigation button handlers
+    nextBtn.addEventListener("click", () => {
+      const cardWidth = carousel.querySelector("div")?.offsetWidth || 0;
+      carousel.scrollBy({ left: cardWidth + CARD_GAP, behavior: "smooth" });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      const cardWidth = carousel.querySelector("div")?.offsetWidth || 0;
+      carousel.scrollBy({ left: -(cardWidth + CARD_GAP), behavior: "smooth" });
+    });
+
+    // Update button visibility based on scroll position
+    function updateButtons() {
+      if (carousel) {
+        const isAtStart = carousel.scrollLeft <= SCROLL_THRESHOLD;
+        const isAtEnd =
+          carousel.scrollLeft >=
+          carousel.scrollWidth - carousel.clientWidth - SCROLL_THRESHOLD;
+
+        prevBtn!.style.opacity = isAtStart ? "0" : "1";
+        prevBtn!.style.pointerEvents = isAtStart ? "none" : "auto";
+        nextBtn!.style.opacity = isAtEnd ? "0" : "1";
+        nextBtn!.style.pointerEvents = isAtEnd ? "none" : "auto";
+      }
+    }
+
+    carousel.addEventListener("scroll", updateButtons);
+    updateButtons();
+
+    // Drag to scroll functionality
+    let isDown = false;
+    let startX: number;
+    let scrollLeft: number;
+    let velocity = 0;
+    let lastX = 0;
+    let lastTime = 0;
+    let animationId: number | null = null;
+
+    // Mouse events
+    carousel.addEventListener("mousedown", (e: MouseEvent) => {
+      isDown = true;
+      carousel.classList.add("dragging");
+      startX = e.pageX;
+      scrollLeft = carousel.scrollLeft;
+      lastX = e.pageX;
+      lastTime = Date.now();
+      velocity = 0;
+
+      // Cancel any ongoing momentum
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    });
+
+    carousel.addEventListener("mouseleave", () => {
+      if (isDown) {
+        isDown = false;
+        carousel.classList.remove("dragging");
+        applyMomentum();
+      }
+    });
+
+    carousel.addEventListener("mouseup", () => {
+      if (isDown) {
+        isDown = false;
+        carousel.classList.remove("dragging");
+        applyMomentum();
+      }
+    });
+
+    carousel.addEventListener("mousemove", (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+
+      const x = e.pageX;
+      const walk = x - startX;
+
+      // Direct scroll for immediate response
+      carousel.scrollLeft = scrollLeft - walk;
+
+      // Calculate velocity for momentum
+      const now = Date.now();
+      const timeDelta = now - lastTime;
+      if (timeDelta > 0) {
+        velocity = (x - lastX) / timeDelta;
+      }
+      lastX = x;
+      lastTime = now;
+    });
+
+    // Touch events for mobile
+    let touchStartX: number;
+    let touchScrollLeft: number;
+
+    carousel.addEventListener(
+      "touchstart",
+      (e: TouchEvent) => {
+        touchStartX = e.touches[0].pageX;
+        touchScrollLeft = carousel.scrollLeft;
+        carousel.classList.add("dragging");
+        lastX = e.touches[0].pageX;
+        lastTime = Date.now();
+        velocity = 0;
+
+        // Cancel any ongoing momentum
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+          animationId = null;
+        }
+      },
+      { passive: true },
+    );
+
+    carousel.addEventListener(
+      "touchend",
+      () => {
+        carousel.classList.remove("dragging");
+        applyMomentum();
+      },
+      { passive: true },
+    );
+
+    carousel.addEventListener(
+      "touchmove",
+      (e: TouchEvent) => {
+        const x = e.touches[0].pageX;
+        const walk = x - touchStartX;
+        carousel.scrollLeft = touchScrollLeft - walk;
+
+        // Calculate velocity
+        const now = Date.now();
+        const timeDelta = now - lastTime;
+        if (timeDelta > 0) {
+          velocity = (x - lastX) / timeDelta;
+        }
+        lastX = x;
+        lastTime = now;
+      },
+      { passive: true },
+    );
+
+    // Apply momentum scrolling after drag ends
+    function applyMomentum() {
+      if (!carousel || Math.abs(velocity) < MIN_VELOCITY) return;
+
+      let currentVelocity = velocity * MOMENTUM_MULTIPLIER;
+
+      function momentumScroll() {
+        if (Math.abs(currentVelocity) < MIN_MOMENTUM) {
+          animationId = null;
+          return;
+        }
+
+        if (carousel) {
+          carousel.scrollLeft -= currentVelocity;
+          currentVelocity *= FRICTION;
+          animationId = requestAnimationFrame(momentumScroll);
+        }
+      }
+
+      momentumScroll();
+    }
+
+    // Prevent click events on links/buttons when dragging
+    let dragDistance = 0;
+
+    carousel.addEventListener("mousedown", () => {
+      dragDistance = 0;
+    });
+
+    carousel.addEventListener("mousemove", (e: MouseEvent) => {
+      if (isDown) {
+        dragDistance += Math.abs(e.movementX);
+      }
+    });
+
+    carousel.addEventListener(
+      "click",
+      (e: Event) => {
+        if (dragDistance > DRAG_CLICK_THRESHOLD) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true,
+    );
+  }
+</script>

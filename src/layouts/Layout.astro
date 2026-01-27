@@ -22,7 +22,7 @@ const ogImageURL = Astro.site ? new URL(ogImage, Astro.site) : ogImage;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class='bg-stone-900'>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,7 +50,7 @@ const ogImageURL = Astro.site ? new URL(ogImage, Astro.site) : ogImage;
     <meta property="twitter:image" content={ogImageURL} />
 
     <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Fonts are loaded via global.css -->

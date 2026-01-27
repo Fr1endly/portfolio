@@ -17,50 +17,50 @@ import Footer from "../components/Footer.astro";
 
   <!-- Second Section: Slides up over hero -->
   <section
-    class="relative w-full h-screen min-h-screen bg-stone-900 z-20 mt-[100vh] pt-8 pb-0 px-6"
+    class="relative w-full min-h-screen bg-stone-900 z-20 mt-[100vh] pt-8 pb-0 px-4 md:px-6"
   >
     <!-- Vertical Label -->
     <div
-      class="absolute left-1/5 top-2/3 -translate-y-1/2 text-stone-400 font-raleway font-extralight text-6xl tracking-wider rotate-180"
+      class="hidden lg:block absolute left-1/5 top-2/3 -translate-y-1/2 text-stone-400 font-raleway font-extralight text-6xl tracking-wider rotate-180"
       style="writing-mode: vertical-lr; text-orientation: sideways;"
     >
       PROJECTS
     </div>
 
-    <div class="w-full h-full flex flex-col justify-center items-center pt-20">
+    <div class="w-full h-full flex flex-col justify-center items-center pt-8 md:pt-14 lg:pt-20">
       <!-- Section Header -->
       <div class="w-full flex justify-center">
-        <div class="relative text-neutral-50 max-w-80 text-justify my-20">
+        <div class="relative text-neutral-50 max-w-80 text-justify my-8 md:my-14 lg:my-20">
           Let's push boundaries and create digital experiences that leave a
           lasting impression. Get in touch and let's build something
           extraordinary.
           <!-- Decorative Corner -->
           <div
-            class="absolute w-10 h-10 -left-10 -bottom-10 border-white border-b-2 border-l-2 rounded-sm"
+            class="hidden md:block absolute w-10 h-10 -left-10 -bottom-10 border-white border-b-2 border-l-2 rounded-sm"
             aria-hidden="true"
           >
           </div>
         </div>
       </div>
-      <div class="w-full h-full flex justify-end items-end">
+      <div class="w-full h-full flex justify-end items-center md:items-end">
         <!-- Projects Carousel -->
-        <div class="relative max-w-3/5 -mx-6 w-full">
+        <div class="relative max-w-full md:max-w-4/5 lg:max-w-3/5 -mx-4 md:-mx-6 w-full">
           <h2
-            class="text-lg md:text-3xl font-semibold text-stone-100 font-raleway py-4 pl-24 w-full"
+            class="text-lg md:text-3xl font-semibold text-stone-100 font-raleway py-4 pl-4 md:pl-12 lg:pl-24 w-full"
           >
             click and drag
           </h2>
 
           <!-- Decorative Corner -->
           <div
-            class="absolute w-10 h-10 -left-10 top-0 border-white border-t-4 border-l-4 rounded-sm"
+            class="hidden md:block absolute w-10 h-10 -left-10 top-0 border-white border-t-4 border-l-4 rounded-sm"
             aria-hidden="true"
           >
           </div>
           <!-- Scroll Container -->
           <div
             id="carousel"
-            class="flex justify-end overflow-x-auto gap-8 px-6 pb-8 snap-x snap-mandatory scroll-smooth"
+            class="flex justify-start overflow-x-auto gap-4 md:gap-8 px-4 md:px-6 pb-8 snap-x snap-mandatory scroll-smooth"
             style="scrollbar-width: none; -ms-overflow-style: none;"
           >
             <ProjectCard

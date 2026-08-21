@@ -1,15 +1,17 @@
 ---
-const { className = "" } = Astro.props;
+import "../styles/hero-blobs.css";
+
+const { className = "", heightClass = "h-svh" } = Astro.props;
 ---
 
 <div
-  class={`relative w-full h-screen overflow-hidden ${className}`}
+  class={`relative w-full ${heightClass} overflow-hidden ${className}`}
   style="isolation: isolate;"
 >
   <!-- Layer 1: Animated Gradient Background -->
   <div
     id="layer-1"
-    class="absolute inset-0 bg-sky-200"
+    class="absolute inset-0 bg-linear-to-br from-sky-200 to-blue-300 via-sky-300"
     <!-- class="absolute inset-0 bg-[linear-gradient(40deg,rgb(108,0,162),rgb(0,17,82))]" -->
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="fixed inset-0 w-0 h-0">
@@ -26,12 +28,11 @@ const { className = "" } = Astro.props;
         </filter>
       </defs>
     </svg>
-    <div class="w-full h-full filter-[url(#goo-image)_blur(35px)] blob--container overflow-visible">
+    <div class="w-full h-full filter-[url(#goo-image)_blur(40px)] blob--container overflow-visible">
       <div class="blob blob--g1 rounded-full"></div>
       <div class="blob blob--g2 rounded-full"></div>
       <div class="blob blob--g3 rounded-full"></div>
       <div class="blob blob--g4 rounded-full"></div>
-      <!-- <div class="blob blob--interactive"></div> -->
     </div>
   </div>
 
@@ -78,70 +79,3 @@ const { className = "" } = Astro.props;
   </div>
   <img src="/images/arrow.svg" alt="" aria-hidden="true" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-8 h-8 animate-bounce pointer-events-none" />
 </div>
-
-<script>
-  // Interactive gradient bubble constants
-  const MAX_BUBBLE_RADIUS = 100;
-  const BUBBLE_EASE_FACTOR = 20;
-  const MOVEMENT_THRESHOLD = 0.1;
-
-  const interBubble =
-    document.querySelector<HTMLDivElement>(".blob--interactive");
-
-  if (interBubble) {
-    let curX = 0;
-    let curY = 0;
-    let tgX = 0;
-    let tgY = 0;
-
-    // The blob is 75% of viewport and positioned at top:50%, left:50%
-    // To center it visually, we need to offset by half its size
-    function getBlobOffset() {
-      return {
-        x: -window.innerWidth * 0.375,
-        y: -window.innerHeight * 0.375
-      };
-    }
-
-    function move() {
-      const dx = tgX - curX;
-      const dy = tgY - curY;
-
-      // Only update transform if there's meaningful movement
-      if (Math.abs(dx) > MOVEMENT_THRESHOLD || Math.abs(dy) > MOVEMENT_THRESHOLD) {
-        curX += dx / BUBBLE_EASE_FACTOR;
-        curY += dy / BUBBLE_EASE_FACTOR;
-        const offset = getBlobOffset();
-        interBubble!.style.transform = `translate(${Math.round(curX + offset.x)}px, ${Math.round(curY + offset.y)}px)`;
-      }
-      requestAnimationFrame(move);
-    }
-
-    window.addEventListener("mousemove", (event) => {
-      // Get center of the viewport
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-
-      // Calculate mouse position relative to center
-      const deltaX = event.clientX - centerX;
-      const deltaY = event.clientY - centerY;
-
-      // Calculate distance from center
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-      // Constrain to radius (use relative coordinates)
-      if (distance > MAX_BUBBLE_RADIUS) {
-        // Normalize and scale to max radius
-        const angle = Math.atan2(deltaY, deltaX);
-        tgX = Math.cos(angle) * MAX_BUBBLE_RADIUS;
-        tgY = Math.sin(angle) * MAX_BUBBLE_RADIUS;
-      } else {
-        // Use offset from center, not absolute position
-        tgX = deltaX;
-        tgY = deltaY;
-      }
-    });
-
-    move();
-  }
-</script>

@@ -27,15 +27,18 @@
   --blob-yellow-transparent: rgba(180, 180, 50, 0);
   --blob-interactive: rgba(225, 229, 18, 0.856);
   --blob-interactive-transparent: rgba(140, 100, 255, 0);
-  --blob-g1-duration: 15s;
-  --blob-g2-duration: 10s;
-  --blob-g3-duration: 14s;
-  --blob-g4-duration: 40s;
+  --blob-g1-duration: 16s;
+  --blob-g2-duration: 6s;
+  --blob-g3-duration: 8s;
+  --blob-g4-duration: 17s;
+  --blob-container-bounce-duration: 25s;
   --blob-opacity: 0.7;
   --blob-size: 140%;
   --blob-g5-size: 80%;
   --blob-interactive-opacity: 0.7;
-  --blob-transperancy: 50%;
+  --blob-transperancy: 75%;
+  --blob-offset-x: 10%;
+  --blob-offset-y: 25%;
 }
 
 /* Lato Font */
@@ -224,6 +227,10 @@ html {
 }
 
 @layer components {
+  .blob--container {
+    animation: bounce var(--blob-container-bounce-duration) infinite;
+  }
+
   .blob {
     @apply absolute mix-blend-hard-light opacity-100;
   }
@@ -237,8 +244,8 @@ html {
         var(--blob-blue-transparent) 70%
       )
       no-repeat;
-    top: calc(50% - 35%);
-    left: calc(50% - 35%);
+    top: calc(50% - var(--blob-offset-y));
+    left: calc(50% - var(--blob-offset-x));
     transform-origin: center center;
     animation: moveInCircle var(--blob-g1-duration) ease infinite;
   }
@@ -252,8 +259,8 @@ html {
         var(--blob-magenta-transparent) 70%
       )
       no-repeat;
-    top: calc(50% - 45%);
-    left: calc(50% - 45%);
+    top: calc(50% - var(--blob-offset-y));
+    left: calc(50% - var(--blob-offset-x));
     transform-origin: calc(50% - min(400px, 40vw));
     animation: moveInCircleReverse var(--blob-g2-duration) reverse infinite;
   }
@@ -282,8 +289,8 @@ html {
         var(--blob-red-transparent) var(--blob-transperancy)
       )
       no-repeat;
-    top: calc(50% - 40%);
-    left: calc(50% - 40%);
+    top: calc(50% - var(--blob-offset-y));
+    left: calc(50% - var(--blob-offset-x));
     transform-origin: calc(50% - min(200px, 25vw));
     animation: moveHorizontal var(--blob-g4-duration) ease infinite;
     opacity: var(--blob-opacity);
@@ -298,8 +305,8 @@ html {
         var(--blob-yellow-transparent) var(--blob-transperancy)
       )
       no-repeat;
-    top: calc(50% - 80%);
-    left: calc(50% - 80%);
+    top: calc(50% - var(--blob-offset-y));
+    left: calc(50% - var(--blob-offset-x));
     transform-origin: calc(50% - min(800px, 80vw)) calc(50% + min(200px, 25vw));
     animation: moveInCircle 14s ease infinite;
   }
@@ -312,8 +319,8 @@ html {
         var(--blob-interactive-transparent) var(--blob-transperancy)
       )
       no-repeat;
-    top: 55%;
-    left: 65%;
+    top: 65%;
+    left: 75%;
     opacity: var(--blob-interactive-opacity);
   }
 }

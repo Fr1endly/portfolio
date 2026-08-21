@@ -26,12 +26,12 @@ const { className = "" } = Astro.props;
         </filter>
       </defs>
     </svg>
-    <div class="w-full h-full filter-[url(#goo-image)_blur(40px)]">
-      <div class="blob blob--g1"></div>
-      <div class="blob blob--g2"></div>
-      <div class="blob blob--g3"></div>
-      <div class="blob blob--g4"></div>
-      <div class="blob blob--interactive"></div>
+    <div class="w-full h-full filter-[url(#goo-image)_blur(35px)] blob--container overflow-visible">
+      <div class="blob blob--g1 rounded-full"></div>
+      <div class="blob blob--g2 rounded-full"></div>
+      <div class="blob blob--g3 rounded-full"></div>
+      <div class="blob blob--g4 rounded-full"></div>
+      <!-- <div class="blob blob--interactive"></div> -->
     </div>
   </div>
 
@@ -60,16 +60,16 @@ const { className = "" } = Astro.props;
   <!-- Layer 3: Text Content (no blend mode - normal colors) -->
   <div
     id="layer-3"
-    class="absolute inset-0 flex flex-col justify-start items-start pointer-events-none border border-red-500"
+    class="absolute inset-0 flex flex-col justify-start items-start pointer-events-none"
   >
-    <div class="pointer-events-auto px-6 md:px-0">
+    <div class="pointer-events-auto px-6 md:px-10 md:py-14">
       <h1
-        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-neutral-50 font-light uppercase font-raleway tracking-tight"
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-neutral-950 font-light uppercase font-raleway tracking-tight"
       >
         Oscar Gizatulin
       </h1>
       <p
-        class="pl-1 text-lg sm:text-xl text-neutral-50 max-w-2xl tracking-wide font-lato"
+        class="pl-1 text-lg sm:text-xl text-neutral-900 max-w-2xl tracking-wide font-lato"
       >
         Welcome to my portfolio. Explore my work and get in touch.
       </p>

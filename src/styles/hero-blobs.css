@@ -1,84 +1,104 @@
 :root {
   --blob-red: rgba(200, 50, 50, 0.8);
-  --blob-red-transparent: rgba(200, 50, 50, 0);
-  --blob-yellow: #fed766;
-  --blob-yellow-transparent: rgba(180, 180, 50, 0);
-  --blob-purple: #8a4fff;
-  --blob-purple-transparent: rgba(100, 220, 255, 0);
-  --blob-g1-duration: 16s;
-  --blob-g2-duration: 6s;
-  --blob-g3-duration: 8s;
-  --blob-g4-duration: 17s;
-  --blob-opacity: 0.7;
-  --blob-size: 50%;
-  --blob-transparency: 75%;
-  --blob-offset-x: 0%;
-  --blob-offset-y: 0%;
+  --blob-red-transparent: rgba(200, 50, 50, 50);
+  --blob-yellow:rgba(239, 241, 47, 0.8);
+  --blob-yellow-transparent: rgba(180, 180, 50, 50);
+  --blob-purple: rgba(138, 79, 255, 0.8);
+  --blob-purple-transparent: rgba(100, 220, 255, 50);
+  --blob-orbit-radius: 100px;
+  --blob-opacity: 100;
+  --blob-size: 20%;
+  --blob-transparency: 50%;
 }
 
 @layer components {
+  .blob-orbit {
+    position: absolute;
+    inset: 0;
+  }
+
   .blob {
     @apply absolute mix-blend-hard-light opacity-100;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+    animation: orbitClockwise var(--blob-orbit-duration) linear infinite;
+    animation-delay: var(--blob-orbit-delay);
   }
 
   .blob--g1 {
-    width: calc(var(--blob-size) - 40%);
-    height: calc(var(--blob-size) - 40%);
+    --blob-orbit-angle: 0deg;
+    --blob-orbit-duration: 10s;
+    --blob-orbit-delay: 0s;
+    width: calc(var(--blob-size) - 15% );
+    height: calc(var(--blob-size) - 15% );
     background: radial-gradient(
         circle at center,
         var(--blob-red) 0,
-        var(--blob-red-transparent) 50%
+        var(--blob-red-transparent) 100%
       )
       no-repeat;
-    top: calc(50% - var(--blob-offset-y));
-    left: calc(50% - var(--blob-offset-x));
-    transform-origin: center center;
-    animation: moveInCircle var(--blob-g1-duration) ease-in-out infinite;
+    opacity: var(--blob-opacity);
   }
 
   .blob--g2 {
-    width: calc(var(--blob-size) - 10%);
-    height: calc(var(--blob-size) - 10%);
+    --blob-orbit-angle: 90deg;
+    --blob-orbit-duration: 10.5s;
+    --blob-orbit-delay: -1s;
+    width: calc(var(--blob-size) - 5% );
+    height: calc(var(--blob-size) - 5% );
     background: radial-gradient(
         circle at center,
         var(--blob-yellow) 0,
-        var(--blob-yellow-transparent) 50%
+        var(--blob-yellow-transparent) 100%
       )
       no-repeat;
-    top: calc(50% - var(--blob-offset-y));
-    left: calc(50% - var(--blob-offset-x));
-    transform-origin: calc(50% - min(400px, 40vw));
-    animation: moveInCircleReverse var(--blob-g2-duration) reverse infinite;
+    opacity: var(--blob-opacity);
   }
 
   .blob--g3 {
-    width: calc(var(--blob-size) + 10%);
-    height: calc(var(--blob-size) + 10%);
+    --blob-orbit-angle: 180deg;
+    --blob-orbit-duration: 11s;
+    --blob-orbit-delay: -1.5s;
+    width: calc(var(--blob-size) );
+    height: calc(var(--blob-size) );
     background: radial-gradient(
         circle at center,
         var(--blob-purple) 0,
-        var(--blob-purple-transparent) 55%
+        var(--blob-purple-transparent) 100%
       )
       no-repeat;
-    top: 0;
-    left: 10%;
-    transform-origin: calc(50% + min(400px, 40vw));
-    animation: moveDiagonal var(--blob-g3-duration) ease infinite;
+    opacity: var(--blob-opacity);
   }
 
   .blob--g4 {
-    width: var(--blob-size);
-    height: var(--blob-size);
+    --blob-orbit-angle: 270deg;
+    --blob-orbit-duration: 4s;
+    --blob-orbit-delay: -2s;
+    width: calc(var(--blob-size) -  15%);
+    height: calc(var(--blob-size) - 15%);
     background: radial-gradient(
         circle at center,
-        var(--blob-red) 0,
-        var(--blob-red-transparent) var(--blob-transparency)
+        var(--blob-yellow) 0,
+        var(--blob-yellow-transparent) var(--blob-transparency)
       )
       no-repeat;
-    top: calc(50% - var(--blob-offset-y));
-    left: calc(50% - var(--blob-offset-x));
-    transform-origin: calc(50% - min(200px, 25vw));
-    animation: moveHorizontal var(--blob-g4-duration) ease infinite;
     opacity: var(--blob-opacity);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --blob-orbit-radius: 5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+    transform: translate(-50%, -50%) rotate(var(--blob-orbit-angle))
+      translateY(calc(-1 * var(--blob-orbit-radius)))
+      rotate(calc(-1 * var(--blob-orbit-angle)));
   }
 }

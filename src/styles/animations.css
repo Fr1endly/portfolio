@@ -1,3 +1,14 @@
+@keyframes orbitClockwise {
+  from {
+    transform: rotate(0deg) translateY(calc(-1 * var(--blob-orbit-radius)))
+      rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateY(calc(-1 * var(--blob-orbit-radius)))
+      rotate(-360deg);
+  }
+}
+
 @keyframes moveInCircle {
   0% {
     transform: rotate(0deg) translateX(0px) rotate(0deg);
@@ -52,7 +63,7 @@
       transform: rotate(0deg) translateX(25px) rotate(0deg);
     }
     100% {
-      transform: rotate(360deg) translateX(25px) rotate(-360deg);
+      transform: rotate(360deg) translateX(25px) rotate(-360deg) ;
     }
   }
 

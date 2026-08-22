@@ -9,12 +9,7 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
   style="isolation: isolate;"
 >
   <!-- Layer 1: Animated Gradient Background -->
-  <div
-    id="layer-1" class="absolute inset-0 bg-neutral-800/80"  >
-    <!-- class="absolute inset-0 " -->
-
-    <!-- class="absolute inset-0 bg-[linear-gradient(40deg,rgb(108,0,162),rgb(0,17,82))]" -->
-
+  <div id="layer-1" class="absolute inset-0 bg-blue-200/90">
     <svg xmlns="http://www.w3.org/2000/svg" class="fixed inset-0 w-0 h-0">
       <defs>
         <filter id="goo-image">
@@ -23,49 +18,28 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
           <feColorMatrix
             in="blur"
             mode="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 0 1 0  0 0 0 19 -8"
             result="goo"></feColorMatrix>
           <feBlend in="SourceGraphic" in2="goo"></feBlend>
         </filter>
       </defs>
     </svg>
-    <div class="w-full h-full filter-[url(#goo-image)_blur(40px)] blob--container overflow-visible">
-      <div class="blob-orbit border-2 border-yellow-500">
-        <div class="blob blob--g1 "></div>
-        <div class="blob blob--g2 "></div>
-        <div class="blob blob--g3 "></div>
-        <div class="blob blob--g4"></div>
-
+    <div class="w-full h-full filter-[url(#goo-image)_blur(45px)] overflow-visible">
+      <div class="blob-orbit" data-blob-field aria-hidden="true">
+        <div class="blob blob--g1" data-main-blob>
+          <div class="blob blob--roaming blob--g2" data-roaming-blob></div>
+          <div class="blob blob--roaming blob--g3" data-roaming-blob></div>
+          <div class="blob blob--roaming blob--g4" data-roaming-blob></div>
+          <div class="blob blob--roaming blob--g5" data-roaming-blob></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Layer 2: Image Cutout Effect (with blend mode) -->
-  <!-- <div id="layer-2" class="absolute inset-0 bg-stone-600 mix-blend-multiply">
-    <div id="images-container" class="relative inset-x-0 w-full h-full">
-      <img
-        src="/images/sticky_notes.png"
-        alt="Sticky notes illustration"
-        class="absolute max-w-none w-28 md:w-40 lg:w-55 floating top-[38%] left-[10%] md:left-[25%] lg:left-[32%]"
-      />
-      <img
-        src="/images/Laptop.png"
-        alt="Laptop illustration"
-        class="absolute max-w-none w-56 md:w-80 lg:w-110 top-[50%] left-[50%] lg:left-[47%]"
-        style="transform: translate(-50%, -50%);"
-      />
-      <img
-        src="/images/coffee.png"
-        alt="Coffee illustration"
-        class="absolute max-w-none w-16 md:w-24 lg:w-34 floating-slow top-[44%] right-[8%] md:right-auto md:left-[56%]"
-      />
-    </div>
-  </div> -->
-
-  <!-- Layer 3: Text Content (no blend mode - normal colors) -->
+  <!-- Layer 2: Text Content (no blend mode - normal colors) -->
   <div
     id="layer-3"
-    class="absolute inset-0 flex flex-col justify-start items-end pointer-events-none"
+    class="absolute inset-0 flex flex-col justify-start items-start pointer-events-none"
   >
     <div class="pointer-events-auto px-6 md:px-10 md:py-14">
       <h1
@@ -74,7 +48,7 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
         Oscar Gizatulin
       </h1>
       <p
-        class="pl-1 text-lg sm:text-xl text-neutral-900 max-w-2xl tracking-wide font-lato"
+        class="pl-1 text-lg sm:text-xl text-neutral-800 max-w-2xl tracking-wide font-lato"
       >
         Welcome to my portfolio. Explore my work and get in touch.
       </p>
@@ -83,3 +57,121 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
   </div>
   <img src="/images/arrow.svg" alt="" aria-hidden="true" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-8 h-8 animate-bounce pointer-events-none" />
 </div>
+
+<script>
+  type Point = { x: number; y: number };
+
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  document.querySelectorAll<HTMLElement>("[data-blob-field]").forEach((field) => {
+    const mainBlob = field.querySelector<HTMLElement>("[data-main-blob]");
+    const roamingBlobs = Array.from(
+      field.querySelectorAll<HTMLElement>("[data-roaming-blob]"),
+    );
+
+    if (!mainBlob || roamingBlobs.length === 0) return;
+
+    const positions = new Map<HTMLElement, Point>();
+    const animations = new Map<HTMLElement, Animation>();
+    let generation = 0;
+    let resizeFrame = 0;
+
+    const pointToTransform = ({ x, y }: Point) =>
+      `translate3d(${x}px, ${y}px, 0)`;
+
+    const getTravelRadius = (blob: HTMLElement) => {
+      const mainRadius = Math.min(mainBlob.clientWidth, mainBlob.clientHeight) / 2;
+      const blobRadius = Math.max(blob.offsetWidth, blob.offsetHeight) / 2;
+      const edgePadding = Math.max(16, mainRadius * 0.1);
+
+      return Math.max(0, mainRadius - blobRadius - edgePadding);
+    };
+
+    const getRandomPoint = (blob: HTMLElement, previous?: Point) => {
+      const travelRadius = getTravelRadius(blob);
+      let point: Point = { x: 0, y: 0 };
+
+      // Avoid very short hops so each blob keeps roaming across the main area.
+      for (let attempt = 0; attempt < 8; attempt += 1) {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.sqrt(Math.random()) * travelRadius;
+        point = {
+          x: Math.cos(angle) * distance,
+          y: Math.sin(angle) * distance,
+        };
+
+        if (!previous || Math.hypot(point.x - previous.x, point.y - previous.y) > travelRadius * 0.35) {
+          break;
+        }
+      }
+
+      return point;
+    };
+
+    const moveBlob = (blob: HTMLElement, index: number, activeGeneration: number) => {
+      if (activeGeneration !== generation || motionPreference.matches) return;
+
+      const from = positions.get(blob) ?? getRandomPoint(blob);
+      const to = getRandomPoint(blob, from);
+      const distance = Math.hypot(to.x - from.x, to.y - from.y);
+      const pixelsPerSecond = [42, 34, 46, 38][index] ?? 40;
+      const duration = Math.min(14000, Math.max(4500, (distance / pixelsPerSecond) * 1000));
+
+      const animation = blob.animate(
+        [
+          { transform: pointToTransform(from) },
+          { transform: pointToTransform(to) },
+        ],
+        {
+          duration,
+          easing: "cubic-bezier(0.45, 0.05, 0.55, 0.95)",
+          fill: "forwards",
+        },
+      );
+
+      animations.set(blob, animation);
+      animation.finished
+        .then(() => {
+          if (activeGeneration !== generation) return;
+
+          positions.set(blob, to);
+          blob.style.transform = pointToTransform(to);
+          animation.cancel();
+          moveBlob(blob, index, activeGeneration);
+        })
+        .catch(() => {
+          // Cancelling on resize or preference changes rejects finished.
+        });
+    };
+
+    const restart = () => {
+      generation += 1;
+      const activeGeneration = generation;
+
+      animations.forEach((animation) => animation.cancel());
+      animations.clear();
+      positions.clear();
+
+      roamingBlobs.forEach((blob, index) => {
+        if (motionPreference.matches) {
+          blob.style.removeProperty("transform");
+          return;
+        }
+
+        const start = getRandomPoint(blob);
+        positions.set(blob, start);
+        blob.style.transform = pointToTransform(start);
+        moveBlob(blob, index, activeGeneration);
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(restart);
+    });
+
+    resizeObserver.observe(mainBlob);
+    motionPreference.addEventListener("change", restart);
+    restart();
+  });
+</script>

@@ -1,29 +1,9 @@
-@keyframes orbitClockwise {
-  from {
-    transform: rotate(0deg) translateY(calc(-1 * var(--blob-orbit-radius)))
-      rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateY(calc(-1 * var(--blob-orbit-radius)))
-      rotate(-360deg);
-  }
-}
-
 @keyframes moveInCircle {
   0% {
     transform: rotate(0deg) translateX(0px) rotate(0deg);
   }
   100% {
     transform: rotate(360deg) translateX(80px) rotate(-360deg);
-  }
-}
-
-@keyframes moveInCircleReverse {
-  0% {
-    transform: rotate(0deg) translateX(60px) rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg) translateX(60px) rotate(360deg);
   }
 }
 
@@ -34,16 +14,6 @@
   }
   50% {
     transform: translateY(40px);
-  }
-}
-
-@keyframes moveDiagonal {
-  0%,
-  100% {
-    transform: translateY(-500px) translateX(400px);
-  }
-  50% {
-    transform: translateY(-770px) translateX(520px);
   }
 }
 
@@ -67,15 +37,6 @@
     }
   }
 
-  @keyframes moveInCircleReverse {
-    0% {
-      transform: rotate(0deg) translateX(40px) rotate(0deg);
-    }
-    100% {
-      transform: rotate(-360deg) translateX(40px) rotate(360deg);
-    }
-  }
-
   @keyframes moveVertical {
     0%,
     100% {
@@ -83,16 +44,6 @@
     }
     50% {
       transform: translateY(20px);
-    }
-  }
-
-  @keyframes moveDiagonal {
-    0%,
-    100% {
-      transform: translateY(75px) translateX(-75px);
-    }
-    50% {
-      transform: translateY(-90px) translateX(90px);
     }
   }
 

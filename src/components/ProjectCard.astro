@@ -28,7 +28,7 @@ const imageBg = imageBgColor || defaultImageBg;
 ---
 
 {projectId ? (
-  <a href={`/projects/${projectId}`} class={`brightness-90 group relative animated-gradient overflow-hidden border ${borderColor} rounded-md
+  <a href={`/projects/${projectId}`} data-animated-gradient class={`brightness-90 group relative overflow-hidden border ${borderColor} rounded-md bg-[linear-gradient(135deg,#0ea5e9,#a855f7,#7c3aed,#f97316)] [background-size:400%_400%]
              transition-all duration-500 hover:shadow-2xl hover:shadow-neutral-900 flex-shrink-0
              w-[85vw] md:w-[45vw] lg:w-[300px] h-72 md:h-80 lg:h-100 snap-start block`}
   >
@@ -43,7 +43,7 @@ const imageBg = imageBgColor || defaultImageBg;
     </div>
   </a>
 ) : (
-  <div class={`brightness-90 group relative animated-gradient overflow-hidden border ${borderColor} rounded-md
+  <div data-animated-gradient class={`brightness-90 group relative overflow-hidden border ${borderColor} rounded-md bg-[linear-gradient(135deg,#0ea5e9,#a855f7,#7c3aed,#f97316)] [background-size:400%_400%]
              transition-all duration-500 hover:shadow-2xl hover:shadow-neutral-900 flex-shrink-0
              w-[85vw] md:w-[45vw] lg:w-[300px] h-72 md:h-80 lg:h-100 snap-start`}
   >
@@ -59,28 +59,19 @@ const imageBg = imageBgColor || defaultImageBg;
   </div>
 )}
 
-<style>
-  .animated-gradient {
-    background: linear-gradient(135deg, #0ea5e9, #a855f7, #7c3aed, #f97316);
-    background-size: 400% 400%;
-    animation: gradientCycle 8s ease infinite;
+<script>
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll<HTMLElement>("[data-animated-gradient]").forEach((card) => {
+      card.animate(
+        [
+          { backgroundPosition: "0% 50%" },
+          { backgroundPosition: "50% 50%" },
+          { backgroundPosition: "100% 50%" },
+          { backgroundPosition: "50% 50%" },
+          { backgroundPosition: "0% 50%" },
+        ],
+        { duration: 8000, easing: "ease", iterations: Infinity },
+      );
+    });
   }
-
-  @keyframes gradientCycle {
-    0% {
-      background-position: 0% 50%;
-    }
-    25% {
-      background-position: 50% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    75% {
-      background-position: 50% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-</style>
+</script>

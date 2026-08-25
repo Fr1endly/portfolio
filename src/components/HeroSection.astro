@@ -1,13 +1,11 @@
 ---
-import "../styles/hero-blobs.css";
 import ProjectsSection from "./ProjectsSection.astro";
 
 const { className = "", heightClass = "h-svh" } = Astro.props;
 ---
 
 <div
-  class={`relative w-full ${heightClass} overflow-hidden ${className}`}
-  style="isolation: isolate;"
+  class={`relative isolate w-full ${heightClass} overflow-hidden ${className}`}
 >
   <!-- Layer 1: Animated Gradient Background -->
   <div id="layer-1" class="absolute inset-0 bg-blue-200/90">
@@ -26,12 +24,12 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
       </defs>
     </svg>
     <div class="w-full h-full filter-[url(#goo-image)_blur(45px)] overflow-visible">
-      <div class="blob-orbit" data-blob-field aria-hidden="true">
-        <div class="blob blob--g1" data-main-blob>
-          <div class="blob blob--roaming blob--g2" data-roaming-blob></div>
-          <div class="blob blob--roaming blob--g3" data-roaming-blob></div>
-          <div class="blob blob--roaming blob--g4" data-roaming-blob></div>
-          <div class="blob blob--roaming blob--g5" data-roaming-blob></div>
+      <div class="absolute top-[37%] left-[75%] aspect-square w-[min(84vw,68rem)] transform-[translate(-50%,-50%)] will-change-[translate] max-[767px]:w-[min(112vw,34rem)] motion-reduce:translate-x-0 motion-reduce:translate-y-0" data-blob-field data-orbit aria-hidden="true">
+        <div class="absolute inset-0 h-[160%] w-[140%] overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(249,202,217,1)_0,rgba(249,202,217,0.5)_100%)] opacity-100 mix-blend-hard-light motion-reduce:rounded-[48%_52%_46%_54%/52%_46%_54%_48%]" data-main-blob>
+          <div class="absolute top-[50%] left-[45%] h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(78,255,239,0.4)_0,rgba(78,255,239,0.3)_100%)] opacity-100 mix-blend-hard-light will-change-transform motion-reduce:transform-[translate3d(-28%,-32%,0)]" data-roaming-blob data-breathe-min="0.95" data-breathe-max="1.06" data-breathe-duration="7600" data-breathe-delay="-1800"></div>
+          <div class="absolute top-[50%] left-[45%] h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(78,255,239,0.4)_0,rgba(78,255,239,0.3)_100%)] opacity-100 mix-blend-hard-light will-change-transform motion-reduce:transform-[translate3d(42%,-12%,0)]" data-roaming-blob data-breathe-min="0.96" data-breathe-max="1.05" data-breathe-duration="9200" data-breathe-delay="-4100"></div>
+          <div class="absolute top-[50%] left-[45%] h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(109,114,195,0.4)_0,rgba(109,114,195,0.2)_50%)] opacity-100 mix-blend-hard-light will-change-transform motion-reduce:transform-[translate3d(105%,100%,0)]" data-roaming-blob data-breathe-min="0.94" data-breathe-max="1.07" data-breathe-duration="8400" data-breathe-delay="-5200"></div>
+          <div class="absolute top-[50%] left-[45%] h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(109,114,195,0.4)_0,rgba(109,114,195,0.2)_100%)] opacity-100 mix-blend-hard-light will-change-transform motion-reduce:transform-[translate3d(-105%,90%,0)]" data-roaming-blob data-breathe-min="0.95" data-breathe-max="1.06" data-breathe-duration="10000" data-breathe-delay="-2700"></div>
         </div>
       </div>
     </div>
@@ -81,13 +79,57 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
 
     if (!mainBlob || roamingBlobs.length === 0) return;
 
+    const orbit = field.closest<HTMLElement>("[data-orbit]");
     const positions = new Map<HTMLElement, Point>();
     const animations = new Map<HTMLElement, Animation>();
+    let ambientAnimations: Animation[] = [];
     let generation = 0;
     let resizeFrame = 0;
 
     const pointToTransform = ({ x, y }: Point) =>
       `translate3d(${x}px, ${y}px, 0)`;
+
+    const restartAmbientAnimations = () => {
+      ambientAnimations.forEach((animation) => animation.cancel());
+      ambientAnimations = [];
+
+      if (motionPreference.matches) return;
+
+      if (orbit) {
+        ambientAnimations.push(orbit.animate(
+          [
+            { translate: "-2vw -2vh" },
+            { translate: "5vw 6vh" },
+            { translate: "-2vw -2vh" },
+          ],
+          { duration: 16000, easing: "ease-in-out", iterations: Infinity },
+        ));
+      }
+
+      ambientAnimations.push(mainBlob.animate(
+        [
+          { borderRadius: "48% 52% 46% 54% / 52% 46% 54% 48%", transform: "scale(1) rotate(0deg)" },
+          { borderRadius: "54% 46% 52% 48% / 45% 55% 47% 53%", transform: "scale(1.025, 0.985) rotate(1.5deg)", offset: 0.33 },
+          { borderRadius: "45% 55% 48% 52% / 55% 47% 53% 45%", transform: "scale(0.985, 1.025) rotate(-1.5deg)", offset: 0.66 },
+          { borderRadius: "48% 52% 46% 54% / 52% 46% 54% 48%", transform: "scale(1) rotate(0deg)" },
+        ],
+        { duration: 14000, easing: "ease-in-out", iterations: Infinity },
+      ));
+
+      roamingBlobs.forEach((blob) => {
+        const min = Number(blob.dataset.breatheMin ?? 0.95);
+        const max = Number(blob.dataset.breatheMax ?? 1.06);
+        ambientAnimations.push(blob.animate(
+          [{ scale: String(min) }, { scale: String(max) }, { scale: String(min) }],
+          {
+            duration: Number(blob.dataset.breatheDuration ?? 8000),
+            delay: Number(blob.dataset.breatheDelay ?? 0),
+            easing: "ease-in-out",
+            iterations: Infinity,
+          },
+        ));
+      });
+    };
 
     const getTravelRadius = (blob: HTMLElement) => {
       const mainRadius = Math.min(mainBlob.clientWidth, mainBlob.clientHeight) / 2;
@@ -181,7 +223,11 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
     });
 
     resizeObserver.observe(mainBlob);
-    motionPreference.addEventListener("change", restart);
+    motionPreference.addEventListener("change", () => {
+      restartAmbientAnimations();
+      restart();
+    });
+    restartAmbientAnimations();
     restart();
   });
 </script>

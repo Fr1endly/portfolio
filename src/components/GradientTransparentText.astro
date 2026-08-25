@@ -7,10 +7,10 @@ interface Props {
 const { text = "CALL TO\nACTION", class: className = "" } = Astro.props;
 ---
 
-<div class={`relative w-full h-screen overflow-hidden ${className}`} style="isolation: isolate;">
+<div class={`relative isolate w-full h-screen overflow-hidden ${className}`} data-gradient-transparent-text>
   <!-- Layer 1: Animated Gradient Background -->
-  <div class="gradient-bg">
-    <svg xmlns="http://www.w3.org/2000/svg">
+  <div class="absolute inset-0 bg-[linear-gradient(40deg,rgb(108,0,162),rgb(0,17,82))]">
+    <svg xmlns="http://www.w3.org/2000/svg" class="fixed inset-0 size-0">
       <defs>
         <filter id="goo">
           <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
@@ -19,19 +19,19 @@ const { text = "CALL TO\nACTION", class: className = "" } = Astro.props;
         </filter>
       </defs>
     </svg>
-    <div class="w-full h-full gradients-container">
-      <div class="g1"></div>
-      <div class="g2"></div>
-      <div class="g3"></div>
-      <div class="g4"></div>
-      <div class="g5"></div>
-      <div class="interactive"></div>
+    <div class="h-full w-full [filter:url(#goo)_blur(40px)]">
+      <div class="absolute top-[10%] left-[10%] size-[80%] origin-center bg-[radial-gradient(circle_at_center,rgba(18,113,255,0.8)_0,rgba(18,113,255,0)_50%)] opacity-100 mix-blend-hard-light" data-gradient-blob="vertical"></div>
+      <div class="absolute top-[10%] left-[10%] size-[80%] origin-[calc(50%-400px)] bg-[radial-gradient(circle_at_center,rgba(221,74,255,0.8)_0,rgba(221,74,255,0)_50%)] opacity-100 mix-blend-hard-light" data-gradient-blob="circle-reverse"></div>
+      <div class="absolute top-[calc(10%+200px)] left-[calc(10%-500px)] size-[80%] origin-[calc(50%+400px)] bg-[radial-gradient(circle_at_center,rgba(100,220,255,0.8)_0,rgba(100,220,255,0)_50%)] opacity-100 mix-blend-hard-light" data-gradient-blob="circle-slow"></div>
+      <div class="absolute top-[10%] left-[10%] size-[80%] origin-[calc(50%-200px)] bg-[radial-gradient(circle_at_center,rgba(200,50,50,0.8)_0,rgba(200,50,50,0)_50%)] opacity-70 mix-blend-hard-light" data-gradient-blob="horizontal"></div>
+      <div class="absolute -top-[30%] -left-[30%] size-[160%] origin-[calc(50%-800px)_calc(50%+200px)] bg-[radial-gradient(circle_at_center,rgba(180,180,50,0.8)_0,rgba(180,180,50,0)_50%)] opacity-100 mix-blend-hard-light" data-gradient-blob="circle"></div>
+      <div class="absolute -top-1/2 -left-1/2 size-full bg-[radial-gradient(circle_at_center,rgba(140,100,255,0.8)_0,rgba(140,100,255,0)_50%)] opacity-70 mix-blend-hard-light" data-interactive-gradient></div>
     </div>
   </div>
 
   <!-- Layer 2: Transparent Text Knockout Effect -->
-  <div class="absolute inset-0 bg-black flex justify-center items-center text-layer">
-    <h1 class="text-center text-white m-0">
+  <div class="absolute inset-0 flex items-center justify-center bg-black mix-blend-multiply">
+    <h1 class="m-0 text-center font-['Arial_Black',sans-serif] text-5xl font-black leading-[1.2] tracking-[2px] text-white md:text-7xl">
       {text.split('\n').map((line, index) => (
         <>
           {line}
@@ -42,132 +42,46 @@ const { text = "CALL TO\nACTION", class: className = "" } = Astro.props;
   </div>
 </div>
 
-<style>
-  /* Layer 1 - Gradient Background */
-  .gradient-bg {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82));
-  }
-
-  .gradient-bg svg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .gradients-container {
-    filter: url(#goo) blur(40px);
-  }
-
-  .g1 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(18, 113, 255, 0.8) 0, rgba(18, 113, 255, 0) 50%) no-repeat;
-    mix-blend-mode: hard-light;
-    width: 80%;
-    height: 80%;
-    top: calc(50% - 40%);
-    left: calc(50% - 40%);
-    transform-origin: center center;
-    animation: moveVertical 30s ease infinite;
-    opacity: 1;
-  }
-
-  .g2 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(221, 74, 255, 0.8) 0, rgba(221, 74, 255, 0) 50%) no-repeat;
-    mix-blend-mode: hard-light;
-    width: 80%;
-    height: 80%;
-    top: calc(50% - 40%);
-    left: calc(50% - 40%);
-    transform-origin: calc(50% - 400px);
-    animation: moveInCircle 20s reverse infinite;
-    opacity: 1;
-  }
-
-  .g3 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(100, 220, 255, 0.8) 0, rgba(100, 220, 255, 0) 50%) no-repeat;
-    mix-blend-mode: hard-light;
-    width: 80%;
-    height: 80%;
-    top: calc(50% - 40% + 200px);
-    left: calc(50% - 40% - 500px);
-    transform-origin: calc(50% + 400px);
-    animation: moveInCircle 40s linear infinite;
-    opacity: 1;
-  }
-
-  .g4 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(200, 50, 50, 0.8) 0, rgba(200, 50, 50, 0) 50%) no-repeat;
-    mix-blend-mode: hard-light;
-    width: 80%;
-    height: 80%;
-    top: calc(50% - 40%);
-    left: calc(50% - 40%);
-    transform-origin: calc(50% - 200px);
-    animation: moveHorizontal 40s ease infinite;
-    opacity: 0.7;
-  }
-
-  .g5 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(180, 180, 50, 0.8) 0, rgba(180, 180, 50, 0) 50%) no-repeat;
-    mix-blend-mode: hard-light;
-    width: 160%;
-    height: 160%;
-    top: calc(50% - 80%);
-    left: calc(50% - 80%);
-    transform-origin: calc(50% - 800px) calc(50% + 200px);
-    animation: moveInCircle 20s ease infinite;
-    opacity: 1;
-  }
-
-  .interactive {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(140, 100, 255, 0.8) 0, rgba(140, 100, 255, 0) 50%) no-repeat;
-    mix-blend-mode: hard-light;
-    top: -50%;
-    left: -50%;
-    opacity: 0.7;
-  }
-
-  /* Layer 2 - Black overlay with transparent text (knockout effect) */
-  .text-layer {
-    mix-blend-mode: multiply;
-  }
-
-  .text-layer h1 {
-    font-family: "Arial Black", sans-serif;
-    font-size: 72px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    line-height: 1.2;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .text-layer h1 {
-      font-size: 48px;
-    }
-  }
-</style>
-
 <script>
-  const interBubble = document.querySelector<HTMLDivElement>('.gradient-transparent-text .interactive');
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (interBubble) {
+  document.querySelectorAll<HTMLElement>("[data-gradient-transparent-text]").forEach((gradient) => {
+    if (motionPreference.matches) return;
+
+    const radius = window.matchMedia("(max-width: 767px)").matches ? 25 : 80;
+    const verticalDistance = window.matchMedia("(max-width: 767px)").matches ? 20 : 40;
+    const horizontalDistance = window.matchMedia("(max-width: 767px)").matches ? 20 : 40;
+    const animations: Record<string, { keyframes: Keyframe[]; options: KeyframeAnimationOptions }> = {
+      vertical: {
+        keyframes: [{ transform: `translateY(-${verticalDistance}px)` }, { transform: `translateY(${verticalDistance}px)` }, { transform: `translateY(-${verticalDistance}px)` }],
+        options: { duration: 30000, easing: "ease", iterations: Infinity },
+      },
+      horizontal: {
+        keyframes: [{ transform: `translate(-${horizontalDistance}px, -${horizontalDistance / 2}px)` }, { transform: `translate(${horizontalDistance}px, ${horizontalDistance / 2}px)` }, { transform: `translate(-${horizontalDistance}px, -${horizontalDistance / 2}px)` }],
+        options: { duration: 40000, easing: "ease", iterations: Infinity },
+      },
+      circle: {
+        keyframes: [{ transform: `rotate(0deg) translateX(${radius}px) rotate(0deg)` }, { transform: `rotate(360deg) translateX(${radius}px) rotate(-360deg)` }],
+        options: { duration: 20000, easing: "ease", iterations: Infinity },
+      },
+      "circle-reverse": {
+        keyframes: [{ transform: `rotate(360deg) translateX(${radius}px) rotate(-360deg)` }, { transform: `rotate(0deg) translateX(${radius}px) rotate(0deg)` }],
+        options: { duration: 20000, easing: "linear", iterations: Infinity },
+      },
+      "circle-slow": {
+        keyframes: [{ transform: `rotate(0deg) translateX(${radius}px) rotate(0deg)` }, { transform: `rotate(360deg) translateX(${radius}px) rotate(-360deg)` }],
+        options: { duration: 40000, easing: "linear", iterations: Infinity },
+      },
+    };
+
+    gradient.querySelectorAll<HTMLElement>("[data-gradient-blob]").forEach((blob) => {
+      const config = animations[blob.dataset.gradientBlob ?? ""];
+      if (config) blob.animate(config.keyframes, config.options);
+    });
+
+    const interBubble = gradient.querySelector<HTMLDivElement>("[data-interactive-gradient]");
+
+    if (!interBubble) return;
     let curX = 0;
     let curY = 0;
     let tgX = 0;
@@ -188,5 +102,5 @@ const { text = "CALL TO\nACTION", class: className = "" } = Astro.props;
     });
 
     move();
-  }
+  });
 </script>

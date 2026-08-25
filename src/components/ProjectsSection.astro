@@ -1,153 +1,470 @@
 ---
-const projects = [
+const featuredProjects = [
   {
     id: "sbs",
     number: "01",
     title: "Side by Side",
-    shortTitle: "Side by Side",
     type: "Web experience",
     year: "2024",
-    role: "UX/UI + development",
-    stack: "Next.js / React / GSAP",
-    description:
-      "A digital home for a Latvia-made tabletop RPG, designed to introduce the world through atmosphere, movement, and interactive play examples.",
-    tabBackground: "bg-[color-mix(in_srgb,#2f6edb_26%,#f2e9e3)] hover:bg-[#2f6edb] aria-selected:bg-[#2f6edb]",
+    image: "/images/design/sbs-homepage.png",
+    imageAlt: "Side by Side website interface",
+    accent: "#2f6edb",
   },
   {
     id: "rd",
     number: "02",
     title: "Resistance Diary",
-    shortTitle: "Resistance Diary",
     type: "Progressive web app",
     year: "2025",
-    role: "Product design + development",
-    stack: "React / TypeScript / Zustand",
-    description:
-      "An offline-first training tracker focused on progressive overload: no accounts, no distractions, just a fast record of the work that matters.",
-    tabBackground: "bg-[color-mix(in_srgb,#ffad27_26%,#f2e9e3)] hover:bg-[#ffad27] aria-selected:bg-[#ffad27]",
+    image: "/images/design/rd-homepage.png",
+    imageAlt: "Resistance Diary mobile app interface",
+    accent: "#ffad27",
   },
 ];
+
+const placeholderProjects = Array.from({ length: 10 }, (_, index) => ({
+  id: `open-${index + 1}`,
+  number: String(index + 3).padStart(2, "0"),
+  title: "Place for your project",
+  type: "Available slot",
+  year: "Let's talk",
+  image: null,
+  imageAlt: "",
+  accent: index % 2 === 0 ? "#2f6edb" : "#ffad27",
+}));
+
+const projects = [...featuredProjects, ...placeholderProjects];
 ---
 
-<section id="projects" class="border-2 border-red-500 relative w-full min-h-svh p-[clamp(0.55rem,1.2vw,1rem)] text-[#121212] pointer-events-auto max-[800px]:min-h-0 max-[800px]:p-2" aria-label="Selected projects">
-  <div class="grid grid-cols-[clamp(5.5rem,8.5vw,7.25rem)_minmax(0,1fr)] gap-[clamp(0.55rem,1vw,0.85rem)] min-h-[calc(100svh-clamp(1.1rem,2.4vw,2rem))] max-[800px]:block max-[800px]:min-h-0" data-project-switcher>
-    <div class="flex flex-col gap-[0.45rem] p-[0.55rem] max-[800px]:grid max-[800px]:grid-cols-[auto_repeat(2,minmax(0,1fr))] max-[800px]:gap-[0.35rem] max-[800px]:p-[0.45rem] max-[480px]:grid-cols-2" role="tablist" aria-label="Selected projects">
-      <div class="flex flex-col justify-between min-h-[5.25rem] px-[0.55rem] py-[0.65rem] font-lato text-[0.65rem] leading-[1.1] font-bold uppercase max-[800px]:min-h-[4.5rem] max-[800px]:p-2 max-[480px]:hidden" aria-hidden="true">
-        <span>Selected</span>
-        <span>work</span>
-      </div>
+<section
+  id="projects"
+  class="projects-carousel"
+  aria-labelledby="projects-heading"
+  data-project-carousel
+>
+  <header class="projects-carousel__header">
+    <p>Layer 03 / Projects</p>
+    <p>{String(featuredProjects.length).padStart(2, "0")} selected / {String(placeholderProjects.length).padStart(2, "0")} open</p>
+  </header>
 
-      {
-        projects.map((project, index) => (
-          <button
-            type="button"
-            class={`relative flex flex-[0_1_9.2rem] flex-col items-start min-h-28 p-[0.65rem] overflow-hidden border border-transparent rounded-[0.35rem] text-left cursor-pointer transition-[background-color,color,transform] duration-180 ease-in-out hover:translate-x-[0.15rem] focus-visible:outline-3 focus-visible:outline-[#121212] focus-visible:outline-offset-2 motion-reduce:transition-none max-[800px]:min-h-[4.5rem] max-[800px]:p-[0.55rem] max-[480px]:min-h-[5.2rem] ${project.tabBackground}`}
-            id={`project-tab-${project.id}`}
-            role="tab"
-            aria-controls={`project-panel-${project.id}`}
-            aria-selected={index === 0 ? "true" : "false"}
-            tabindex={index === 0 ? 0 : -1}
-            data-project-tab={project.id}
-          >
-            <span class="relative z-[1] font-lato text-[0.66rem] leading-none font-bold">{project.number}</span>
-            <span class="relative z-[1] mt-auto font-lato text-[clamp(0.72rem,1vw,0.92rem)] leading-[1.05] font-bold max-[800px]:max-w-[10ch]">{project.shortTitle}</span>
-            <span class="absolute top-[0.55rem] right-[0.6rem] z-[1] text-[0.95rem]" aria-hidden="true">&#8599;</span>
-          </button>
-        ))
-      }
-
-      <a class="mt-auto flex justify-between gap-1 rounded-[0.35rem] px-[0.55rem] py-3 font-lato text-[0.62rem] leading-[1.15] font-bold text-[#121212] no-underline focus-visible:outline-3 focus-visible:outline-[#121212] focus-visible:outline-offset-2 max-[800px]:hidden" href="mailto:gizatulinso@gmail.com">
-        <span>Available for work</span>
-        <span aria-hidden="true">&#8599;</span>
-      </a>
+  <div class="projects-carousel__stage" data-carousel-stage>
+    <div class="projects-carousel__intro">
+      <p>Selected</p>
+      <h2 id="projects-heading">Work</h2>
+      <span>2024 / 2025</span>
     </div>
 
-    <div class="min-w-0 min-h-0">
-      {
-        projects.map((project, index) => (
-          <article
-            class="grid grid-cols-[minmax(18rem,0.78fr)_minmax(28rem,1.35fr)] gap-[clamp(0.7rem,1.4vw,1.15rem)] h-full min-w-0 min-h-0 p-[clamp(0.75rem,1.4vw,1.15rem)] max-[1050px]:grid-cols-[minmax(17rem,0.9fr)_minmax(23rem,1.1fr)] max-[800px]:grid-cols-1 max-[800px]:h-auto max-[800px]:p-2"
-            id={`project-panel-${project.id}`}
-            role="tabpanel"
-            aria-labelledby={`project-tab-${project.id}`}
-            data-project-panel={project.id}
-            hidden={index !== 0}
+    <div class="projects-carousel__path" aria-hidden="true"></div>
+
+    {
+      projects.map((project, index) => (
+        <div
+          class="projects-carousel__item"
+          data-carousel-item
+          data-index={index}
+        >
+          <a
+            class="project-card"
+            href={project.image ? `/projects/${project.id}` : "mailto:gizatulinso@gmail.com?subject=Project%20inquiry"}
+            style={`--project-accent: ${project.accent}`}
+            aria-label={project.image ? `View ${project.title} case study` : "Get in touch about your project"}
           >
-            <div class="flex flex-col rounded-[clamp(1rem,2.4vw,1.8rem)] border border-[#121212] bg-[#f3ebe6] p-[clamp(1rem,2.2vw,2rem)] max-[800px]:min-h-[min(35rem,68svh)] max-[800px]:rounded-2xl max-[800px]:p-[1.15rem] max-[480px]:min-h-[36rem]">
-              <div class="flex justify-between gap-4 font-lato text-[0.66rem] leading-none font-bold uppercase max-[480px]:text-[0.58rem]">
-                <span>Layer 03 / Projects</span>
-                <span>{project.number} of {String(projects.length).padStart(2, "0")}</span>
+            {
+              project.image ? (
+                <div class="project-card__image">
+                  <img src={project.image} alt={project.imageAlt} loading="lazy" />
+                </div>
+              ) : (
+                <div class="project-card__placeholder" aria-hidden="true">
+                  <span>Place for</span>
+                  <strong>your project</strong>
+                </div>
+              )
+            }
+            <div class="project-card__details">
+              <div>
+                <span class="project-card__number">{project.number}</span>
+                <h3>{project.title}</h3>
               </div>
-
-              <div class="my-auto">
-                <p class="mb-4 inline-block p-0 font-lato text-[0.72rem] leading-none font-normal uppercase">{project.type}</p>
-                <h2 class="m-0 max-w-[10ch] [overflow-wrap:break-word] font-raleway text-[clamp(2.65rem,4vw,4.2rem)] leading-[0.88] font-[650] tracking-normal uppercase max-[1050px]:text-[clamp(2.4rem,4.6vw,3.8rem)] max-[800px]:max-w-[11ch] max-[800px]:text-[clamp(2.65rem,11vw,4.8rem)]">{project.title}</h2>
-                <p class="mt-[clamp(1.25rem,2.2vw,2rem)] max-w-xl font-lato text-[clamp(0.9rem,1.15vw,1.05rem)] leading-[1.45] font-normal">{project.description}</p>
-
-                <dl class="mt-[clamp(1.35rem,2.5vw,2.2rem)] grid grid-cols-2 gap-4 pt-4 font-lato [&_dt]:mb-[0.3rem] [&_dt]:text-[0.62rem] [&_dt]:leading-none [&_dt]:font-bold [&_dt]:uppercase [&_dd]:m-0 [&_dd]:text-[0.78rem] [&_dd]:leading-[1.25] [&_dd]:font-normal">
-                  <div>
-                    <dt>Year</dt>
-                    <dd>{project.year}</dd>
-                  </div>
-                  <div>
-                    <dt>Role</dt>
-                    <dd>{project.role}</dd>
-                  </div>
-                  <div class="col-span-2">
-                    <dt>Built with</dt>
-                    <dd>{project.stack}</dd>
-                  </div>
-                </dl>
+              <div class="project-card__meta">
+                <span>{project.type}</span>
+                <span>{project.year} &#8599;</span>
               </div>
-
-              <a class="mt-6 flex w-fit min-w-[10.75rem] items-center justify-between py-[0.35rem] font-lato text-[0.74rem] leading-none font-bold text-[#121212] underline decoration-[0.1em] underline-offset-[0.3em] transition-transform duration-180 hover:-translate-y-[0.18rem] focus-visible:outline-3 focus-visible:outline-[#121212] focus-visible:outline-offset-2 motion-reduce:transition-none" href={`/projects/${project.id}`}>
-                <span>View case study</span>
-                <span aria-hidden="true">&#8599;</span>
-              </a>
             </div>
-          </article>
-        ))
-      }
-    </div>
+          </a>
+        </div>
+      ))
+    }
   </div>
+
+  <p class="projects-carousel__status" aria-live="polite" data-carousel-status>
+    Projects rotate clockwise. Hover or focus a project to pause.
+  </p>
 </section>
 
 <script>
-  document.querySelectorAll<HTMLElement>("[data-project-switcher]").forEach((switcher) => {
-    const tabs = Array.from(switcher.querySelectorAll<HTMLButtonElement>("[data-project-tab]"));
-    const panels = Array.from(switcher.querySelectorAll<HTMLElement>("[data-project-panel]"));
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const activateProject = (projectId: string, focus = false) => {
-      tabs.forEach((tab) => {
-        const isActive = tab.dataset.projectTab === projectId;
-        tab.setAttribute("aria-selected", String(isActive));
-        tab.tabIndex = isActive ? 0 : -1;
-        if (isActive && focus) tab.focus();
-      });
+  document.querySelectorAll<HTMLElement>("[data-project-carousel]").forEach((carousel) => {
+    const stage = carousel.querySelector<HTMLElement>("[data-carousel-stage]");
+    const items = Array.from(carousel.querySelectorAll<HTMLElement>("[data-carousel-item]"));
+    const status = carousel.querySelector<HTMLElement>("[data-carousel-status]");
 
-      panels.forEach((panel) => {
-        panel.hidden = panel.dataset.projectPanel !== projectId;
+    if (!stage || items.length === 0) return;
+
+    let angle = -Math.PI / 2;
+    let previousTime = performance.now();
+    let animationFrame = 0;
+    let isCardActive = false;
+    let isVisible = true;
+
+    const positionItems = () => {
+      const width = stage.clientWidth;
+      const height = stage.clientHeight;
+      const radiusX = Math.max(0, width * (width < 700 ? 0.22 : 0.34));
+      const radiusY = Math.max(0, height * (width < 700 ? 0.31 : 0.32));
+
+      items.forEach((item, index) => {
+        const itemAngle = angle + (index / items.length) * Math.PI * 2;
+        const x = Math.cos(itemAngle) * radiusX;
+        const y = Math.sin(itemAngle) * radiusY;
+        const depth = (Math.sin(itemAngle) + 1) / 2;
+
+        item.style.setProperty("--carousel-x", `${x}px`);
+        item.style.setProperty("--carousel-y", `${y}px`);
+        item.style.setProperty("--carousel-scale", String(0.88 + depth * 0.12));
+        item.style.zIndex = String(2 + Math.round(depth * 10));
       });
     };
 
-    tabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => {
-        if (tab.dataset.projectTab) activateProject(tab.dataset.projectTab);
-      });
+    const animate = (time: number) => {
+      const elapsed = Math.min(time - previousTime, 40);
+      previousTime = time;
 
-      tab.addEventListener("keydown", (event) => {
-        if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+      if (!isCardActive && isVisible && !motionPreference.matches) {
+        angle += elapsed * 0.000055;
+        positionItems();
+      }
 
-        event.preventDefault();
-        let nextIndex = index;
-        if (event.key === "Home") nextIndex = 0;
-        else if (event.key === "End") nextIndex = tabs.length - 1;
-        else if (event.key === "ArrowDown" || event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
-        else nextIndex = (index - 1 + tabs.length) % tabs.length;
+      animationFrame = requestAnimationFrame(animate);
+    };
 
-        const nextProject = tabs[nextIndex]?.dataset.projectTab;
-        if (nextProject) activateProject(nextProject, true);
-      });
+    const setPaused = (paused: boolean) => {
+      isCardActive = paused;
+      carousel.toggleAttribute("data-paused", paused);
+      if (status) {
+        status.textContent = paused
+          ? "Carousel paused."
+          : "Projects rotate clockwise. Hover or focus a project to pause.";
+      }
+    };
+
+    items.forEach((item) => {
+      item.addEventListener("pointerenter", () => setPaused(true));
+      item.addEventListener("pointerleave", () => setPaused(false));
+      item.addEventListener("focusin", () => setPaused(true));
+      item.addEventListener("focusout", () => setPaused(false));
     });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry?.isIntersecting ?? true;
+        previousTime = performance.now();
+      },
+      { threshold: 0.05 },
+    );
+
+    observer.observe(carousel);
+    window.addEventListener("resize", positionItems);
+    motionPreference.addEventListener("change", positionItems);
+    positionItems();
+    animationFrame = requestAnimationFrame(animate);
+
+    document.addEventListener("astro:before-swap", () => {
+      cancelAnimationFrame(animationFrame);
+      observer.disconnect();
+    }, { once: true });
   });
 </script>
+
+<style>
+  .projects-carousel {
+    position: relative;
+    width: 100%;
+    min-height: 100svh;
+    overflow: hidden;
+    color: #121212;
+    pointer-events: auto;
+  }
+
+  .projects-carousel__header {
+    position: absolute;
+    inset: clamp(0.9rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2.5rem) auto;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: "Lato", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .projects-carousel__header p,
+  .projects-carousel__intro p,
+  .projects-carousel__intro h2,
+  .projects-carousel__intro span,
+  .project-card h3,
+  .projects-carousel__status {
+    margin: 0;
+  }
+
+  .projects-carousel__stage {
+    position: absolute;
+    inset: clamp(3.5rem, 7vh, 5rem) clamp(0.75rem, 3vw, 2.5rem) clamp(2rem, 4vh, 3rem);
+    min-height: 34rem;
+    isolation: isolate;
+  }
+
+  .projects-carousel__path {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(72%, 70rem);
+    height: 64%;
+    translate: -50% -50%;
+    border: 1px solid rgba(18, 18, 18, 0.2);
+    border-radius: 50%;
+  }
+
+  .projects-carousel__intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: min(34vw, 24rem);
+    translate: -50% -50%;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .projects-carousel__intro p,
+  .projects-carousel__intro span {
+    font-family: "Lato", sans-serif;
+    font-size: 0.64rem;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .projects-carousel__intro h2 {
+    font-family: "Raleway", sans-serif;
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: 650;
+    line-height: 0.82;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .projects-carousel__intro span {
+    display: block;
+    margin-top: 1.25rem;
+  }
+
+  .projects-carousel__item {
+    --carousel-x: 0px;
+    --carousel-y: 0px;
+    --carousel-scale: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: clamp(12.5rem, 19vw, 17rem);
+    transform: translate3d(
+      calc(-50% + var(--carousel-x)),
+      calc(-50% + var(--carousel-y)),
+      0
+    ) scale(var(--carousel-scale));
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .projects-carousel__item:hover,
+  .projects-carousel__item:focus-within {
+    z-index: 50 !important;
+  }
+
+  .project-card {
+    display: block;
+    overflow: hidden;
+    border: 1px solid #121212;
+    border-radius: 0.35rem;
+    background: #f3ebe6;
+    color: #121212;
+    text-decoration: none;
+    box-shadow: 0 0.75rem 2rem rgba(18, 18, 18, 0.12);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .project-card:hover,
+  .project-card:focus-visible {
+    transform: scale(1.09);
+    box-shadow: 0 1.2rem 3rem rgba(18, 18, 18, 0.2);
+    outline: 3px solid var(--project-accent);
+    outline-offset: 4px;
+  }
+
+  .project-card__image {
+    height: clamp(7.5rem, 11vw, 10rem);
+    overflow: hidden;
+    border-bottom: 0.55rem solid var(--project-accent);
+    background: #eee8e4;
+  }
+
+  .project-card__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 550ms ease;
+  }
+
+  .project-card__placeholder {
+    display: flex;
+    height: clamp(7.5rem, 11vw, 10rem);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.55rem solid var(--project-accent);
+    background: color-mix(in srgb, var(--project-accent) 24%, #f3ebe6);
+    font-family: "Lato", sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .project-card__placeholder strong {
+    margin-top: 0.35rem;
+    font-family: "Raleway", sans-serif;
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    font-weight: 650;
+    letter-spacing: 0;
+  }
+
+  .project-card:hover .project-card__image img,
+  .project-card:focus-visible .project-card__image img {
+    transform: scale(1.035);
+  }
+
+  .project-card__details {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    min-height: 5.75rem;
+    padding: 0.8rem 0.9rem 0.9rem;
+  }
+
+  .project-card__number,
+  .project-card__meta {
+    font-family: "Lato", sans-serif;
+    font-size: 0.61rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  .project-card h3 {
+    max-width: 11ch;
+    margin-top: 0.55rem;
+    font-family: "Raleway", sans-serif;
+    font-size: clamp(1.15rem, 2vw, 1.65rem);
+    font-weight: 650;
+    line-height: 0.95;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .project-card__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    text-align: right;
+  }
+
+  .projects-carousel__status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 700px) {
+    .projects-carousel {
+      min-height: 42rem;
+    }
+
+    .projects-carousel__stage {
+      inset: 3.25rem 0.5rem 1rem;
+      min-height: 37rem;
+    }
+
+    .projects-carousel__path {
+      width: 58%;
+      height: 68%;
+    }
+
+    .projects-carousel__intro {
+      width: 38vw;
+    }
+
+    .projects-carousel__intro h2 {
+      font-size: clamp(2.15rem, 12vw, 3.5rem);
+    }
+
+    .projects-carousel__intro span {
+      margin-top: 0.75rem;
+      font-size: 0.52rem;
+    }
+
+    .projects-carousel__item {
+      width: min(48vw, 13rem);
+    }
+
+    .project-card__image {
+      height: 7rem;
+    }
+
+    .project-card__placeholder {
+      height: 7rem;
+    }
+
+    .project-card__details {
+      display: block;
+      min-height: 5.5rem;
+      padding: 0.7rem;
+    }
+
+    .project-card__meta {
+      display: none;
+    }
+
+    .project-card h3 {
+      margin-top: 0.4rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .project-card__image img {
+      transition: none;
+    }
+  }
+</style>

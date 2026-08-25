@@ -125,7 +125,7 @@ const projects = [
               </a>
             </div>
 
-            <a
+            <!-- <a
               class="project-stage"
               href={`/projects/${project.id}`}
               aria-label={`View ${project.title} case study`}
@@ -167,7 +167,7 @@ const projects = [
                 <img src={project.image} alt={project.imageAlt} loading="lazy" />
                 <span>Enter project</span>
               </div>
-            </a>
+            </a> -->
           </article>
         ))
       }
@@ -230,13 +230,8 @@ const projects = [
   .project-shell {
     display: grid;
     grid-template-columns: clamp(5.5rem, 8.5vw, 7.25rem) minmax(0, 1fr);
+    gap: clamp(0.55rem, 1vw, 0.85rem);
     min-height: calc(100svh - clamp(1.1rem, 2.4vw, 2rem));
-    overflow: hidden;
-    border: 1px solid var(--ink);
-    border-radius: clamp(1.25rem, 3vw, 2.15rem);
-    background: color-mix(in srgb, var(--paper) 94%, transparent);
-    box-shadow: 0 1.25rem 4rem rgb(19 14 11 / 0.13);
-    backdrop-filter: blur(18px);
   }
 
   .project-rail {
@@ -244,7 +239,6 @@ const projects = [
     flex-direction: column;
     gap: 0.45rem;
     padding: 0.55rem;
-    border-right: 1px solid var(--ink);
   }
 
   .rail-heading {
@@ -322,8 +316,7 @@ const projects = [
     margin-top: auto;
     padding: 0.75rem 0.55rem;
     border-radius: 0.35rem;
-    background: var(--ink);
-    color: #fff;
+    color: var(--ink);
     font: 700 0.62rem/1.15 var(--font-family-lato);
     text-decoration: none;
   }
@@ -346,13 +339,9 @@ const projects = [
     display: none;
   }
 
-  .project-copy,
-  .project-stage {
+  .project-copy {
     border: 1px solid var(--ink);
     border-radius: clamp(1rem, 2.4vw, 1.8rem);
-  }
-
-  .project-copy {
     display: flex;
     flex-direction: column;
     padding: clamp(1rem, 2.2vw, 2rem);
@@ -374,9 +363,7 @@ const projects = [
   .project-type {
     display: inline-block;
     margin: 0 0 1rem;
-    padding: 0.38rem 0.7rem;
-    border: 1px solid var(--ink);
-    border-radius: 999px;
+    padding: 0;
     font: 400 0.72rem/1 var(--font-family-lato);
     text-transform: uppercase;
   }
@@ -402,7 +389,6 @@ const projects = [
     gap: 1rem;
     margin: clamp(1.35rem, 2.5vw, 2.2rem) 0 0;
     padding-top: 1rem;
-    border-top: 1px solid rgb(18 18 18 / 0.35);
   }
 
   .project-meta div:last-child {
@@ -427,12 +413,12 @@ const projects = [
     width: fit-content;
     min-width: 10.75rem;
     margin-top: 1.5rem;
-    padding: 0.78rem 1rem;
-    border-radius: 999px;
-    background: var(--ink);
-    color: #fff;
+    padding: 0.35rem 0;
+    color: var(--ink);
     font: 700 0.74rem/1 var(--font-family-lato);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.3em;
     transition: transform 180ms ease;
   }
 
@@ -445,7 +431,6 @@ const projects = [
     display: block;
     min-height: 30rem;
     overflow: hidden;
-    background: var(--paper);
     color: var(--ink);
   }
 
@@ -653,7 +638,6 @@ const projects = [
       display: block;
       min-height: auto;
       overflow: visible;
-      border-radius: 1.25rem;
     }
 
     .project-rail {
@@ -661,8 +645,6 @@ const projects = [
       grid-template-columns: auto repeat(2, minmax(0, 1fr));
       gap: 0.35rem;
       padding: 0.45rem;
-      border-right: 0;
-      border-bottom: 1px solid var(--ink);
     }
 
     .rail-heading {
@@ -702,7 +684,6 @@ const projects = [
 
     .project-stage {
       min-height: min(72svw, 31rem);
-      border-radius: 1rem;
     }
   }
 

@@ -114,27 +114,50 @@ const projects = [...featuredProjects, ...placeholderProjects];
       const width = stage.clientWidth;
       const height = stage.clientHeight;
       const isCompact = width < 700;
-      const radiusX = Math.max(
+      const tilt =
+        (Number.parseFloat(
+          getComputedStyle(stage).getPropertyValue("--carousel-tilt"),
+        ) *
+          Math.PI) /
+        180;
+      const radiusScale =
+        Number.parseFloat(
+          getComputedStyle(stage).getPropertyValue("--carousel-radius-scale"),
+        ) || 1;
+      const cardScale =
+        Number.parseFloat(
+          getComputedStyle(stage).getPropertyValue("--carousel-card-scale"),
+        ) || 1;
+      const baseRadiusX = Math.max(
         0,
         isCompact ? width * 0.17 : Math.min(width * 0.30, height * 0.4),
       );
-      const radiusY = Math.max(
+      const baseRadiusY = Math.max(
         0,
-        isCompact ? height * 0.24 : Math.min(radiusX * (8 / 7), height * 0.24),
+        isCompact
+          ? height * 0.24
+          : Math.min(baseRadiusX * (8 / 7), height * 0.24),
       );
+      const radiusX = baseRadiusX * radiusScale;
+      const radiusY = baseRadiusY * radiusScale;
 
       stage.style.setProperty("--carousel-radius-x", `${radiusX}px`);
       stage.style.setProperty("--carousel-radius-y", `${radiusY}px`);
 
       items.forEach((item, index) => {
         const itemAngle = angle + (index / items.length) * Math.PI * 2;
-        const x = Math.cos(itemAngle) * radiusX;
-        const y = Math.sin(itemAngle) * radiusY;
+        const ellipseX = Math.cos(itemAngle) * radiusX;
+        const ellipseY = Math.sin(itemAngle) * radiusY;
+        const x = ellipseX * Math.cos(tilt) - ellipseY * Math.sin(tilt);
+        const y = ellipseX * Math.sin(tilt) + ellipseY * Math.cos(tilt);
         const depth = (Math.sin(itemAngle) + 1) / 2;
 
         item.style.setProperty("--carousel-x", `${x}px`);
         item.style.setProperty("--carousel-y", `${y}px`);
-        item.style.setProperty("--carousel-scale", String(0.88 + depth * 0.12));
+        item.style.setProperty(
+          "--carousel-scale",
+          String((0.88 + depth * 0.12) * cardScale),
+        );
         item.style.zIndex = String(2 + Math.round(depth * 10));
       });
     };
@@ -204,8 +227,11 @@ const projects = [...featuredProjects, ...placeholderProjects];
 
   .projects-carousel__stage {
     --carousel-center-x: 50%;
-    --carousel-radius-x: 20rem;
-    --carousel-radius-y: 22.85rem;
+    --carousel-radius-x: 18rem;
+    --carousel-radius-y: 20rem;
+    --carousel-radius-scale: 1.45;
+    --carousel-card-scale: 0.8;
+    --carousel-tilt: -30deg;
     position: absolute;
     inset: clamp(3.5rem, 7vh, 5rem) clamp(0.75rem, 3vw, 2.5rem) clamp(2rem, 4vh, 3rem);
     min-height: 34rem;
@@ -219,6 +245,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
     width: calc(var(--carousel-radius-x) * 2);
     height: calc(var(--carousel-radius-y) * 2);
     translate: -50% -50%;
+    rotate: var(--carousel-tilt);
     border: 1px solid rgba(18, 18, 18, 0.2);
     border-radius: 50%;
   }

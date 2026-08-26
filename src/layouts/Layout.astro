@@ -43,6 +43,20 @@ const ogImageURL = Astro.site ? new URL(ogImage, Astro.site) : ogImage;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImageURL} />
 
+    <link
+      rel="preload"
+      href="/fonts/Raleway-VariableFont_wght.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Lato-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   <body class="min-h-screen flex flex-col">

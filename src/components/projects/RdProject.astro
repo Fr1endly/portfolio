@@ -40,7 +40,7 @@ const projectData = {
 ---
 
 <section
-  class="relative w-full min-h-screen bg-stone-900 pt-8 pb-16 px-4 md:px-6"
+  class="case-study relative w-full min-h-screen bg-stone-900 pt-8 pb-16 px-4 md:px-6"
 >
   <!-- Decorative Corner -->
   <div
@@ -51,27 +51,27 @@ const projectData = {
   <div class="max-w-5xl mx-auto">
     <!-- Header Section -->
     <div class="mb-16 md:mb-24">
-      <div class="flex items-center gap-3 mb-6">
+      <div class="flex flex-wrap items-center gap-3 mb-6">
         <span
-          class="inline-block px-3 py-1 border border-yellow-600 text-yellow-400 text-xs font-lato uppercase tracking-widest"
+          class="type-label inline-block px-3 py-1 border border-yellow-600 text-yellow-400"
         >
           {projectData.id}
         </span>
         <span
-          class="inline-block px-3 py-1 border border-stone-600 text-stone-400 text-xs font-lato uppercase tracking-widest"
+          class="type-label inline-block px-3 py-1 border border-stone-600 text-stone-400"
         >
           {projectData.type}
         </span>
       </div>
 
       <h1
-        class="text-4xl md:text-6xl lg:text-7xl font-light text-stone-100 font-raleway mb-6 leading-tight"
+        class="type-case-title text-stone-100 mb-6"
       >
         {projectData.title}
       </h1>
 
       <p
-        class="text-stone-300 font-lato text-lg md:text-xl leading-relaxed max-w-3xl"
+        class="type-lede text-stone-300 max-w-3xl"
       >
         {projectData.description}
       </p>
@@ -83,36 +83,36 @@ const projectData = {
     >
       <div>
         <h3
-          class="text-stone-400 text-xs font-lato uppercase tracking-widest mb-2"
+          class="type-label text-stone-400 mb-2"
         >
           Year
         </h3>
-        <p class="text-stone-100 text-2xl font-raleway font-light">
+        <p class="type-data text-stone-100 text-2xl">
           {projectData.year}
         </p>
       </div>
 
       <div>
         <h3
-          class="text-stone-400 text-xs font-lato uppercase tracking-widest mb-2"
+          class="type-label text-stone-400 mb-2"
         >
           Role
         </h3>
-        <p class="text-stone-100 text-lg font-raleway font-light">
+        <p class="type-data text-stone-100">
           {projectData.role}
         </p>
       </div>
 
       <div>
         <h3
-          class="text-stone-400 text-xs font-lato uppercase tracking-widest mb-2"
+          class="type-label text-stone-400 mb-2"
         >
           Technologies
         </h3>
         <div class="flex flex-wrap gap-2">
           {
             projectData.technologies.map((tech) => (
-              <span class="text-stone-300 text-sm font-lato">{tech}</span>
+              <span class="type-meta text-stone-300">{tech}</span>
             ))
           }
         </div>
@@ -122,7 +122,7 @@ const projectData = {
     <!-- Image Gallery -->
     <div class="mb-20">
       <h2
-        class="text-2xl md:text-3xl font-raleway font-light text-stone-100 mb-8"
+        class="type-section-title text-stone-100 mb-8"
       >
         Project Gallery
       </h2>
@@ -145,11 +145,11 @@ const projectData = {
     <!-- The Problem -->
     <div class="mb-20">
       <h2
-        class="text-2xl md:text-3xl font-raleway font-light text-stone-100 mb-6"
+        class="type-section-title text-stone-100 mb-6"
       >
         The Problem
       </h2>
-      <p class="text-stone-300 font-lato text-lg leading-relaxed max-w-3xl">
+      <p class="type-body-lg text-stone-300 max-w-3xl">
         Most fitness apps try to be everything at once — social network, meal
         planner, step counter, meditation guide. For someone who just wants to
         show up at the gym, log their sets, and see if they're getting stronger,
@@ -162,17 +162,17 @@ const projectData = {
     <!-- Design Direction -->
     <div class="mb-20">
       <h2
-        class="text-2xl md:text-3xl font-raleway font-light text-stone-100 mb-8"
+        class="type-section-title text-stone-100 mb-8"
       >
         Design Direction
       </h2>
 
       <div class="space-y-10">
         <div>
-          <h3 class="text-xl font-raleway font-light text-stone-100 mb-3">
+          <h3 class="type-subheading text-stone-100 mb-3">
             Dark Glass Morphism
           </h3>
-          <p class="text-stone-300 font-lato leading-relaxed max-w-3xl">
+          <p class="type-body text-stone-300 max-w-3xl">
             The app lives in a dark-themed environment with frosted glass
             surfaces. Training happens in gyms — bright, airy interfaces feel
             out of place. The glass cards with subtle backdrop-blur and
@@ -182,10 +182,10 @@ const projectData = {
         </div>
 
         <div>
-          <h3 class="text-xl font-raleway font-light text-stone-100 mb-3">
+          <h3 class="type-subheading text-stone-100 mb-3">
             Typography Pairing
           </h3>
-          <p class="text-stone-300 font-lato leading-relaxed max-w-3xl">
+          <p class="type-body text-stone-300 max-w-3xl">
             Work Sans for headings — clean, geometric, easy to scan across the
             room. Fira Code for numbers — reps, weights, volume. Monospace
             digits align vertically, making it effortless to compare values at a
@@ -194,10 +194,10 @@ const projectData = {
         </div>
 
         <div>
-          <h3 class="text-xl font-raleway font-light text-stone-100 mb-3">
+          <h3 class="type-subheading text-stone-100 mb-3">
             Amber Accent
           </h3>
-          <p class="text-stone-300 font-lato leading-relaxed max-w-3xl">
+          <p class="type-body text-stone-300 max-w-3xl">
             A single accent color handles all interactive cues — active states,
             progress indicators, call-to-action buttons. One color means zero
             ambiguity about what's tappable and what's informational.
@@ -209,7 +209,7 @@ const projectData = {
     <!-- Technical Highlights -->
     <div class="mb-20">
       <h2
-        class="text-2xl md:text-3xl font-raleway font-light text-stone-100 mb-8"
+        class="type-section-title text-stone-100 mb-8"
       >
         Technical Highlights
       </h2>
@@ -217,7 +217,7 @@ const projectData = {
       <ul class="space-y-4">
         <li class="flex items-start gap-4">
           <span class="text-yellow-600 text-xl mt-1 flex-shrink-0">→</span>
-          <span class="text-stone-300 font-lato text-lg">
+          <span class="type-body-lg text-stone-300">
             <strong class="text-stone-100">Offline-first architecture.</strong> The
             entire app runs as a PWA with Workbox service workers. All data lives
             in localStorage via Zustand's persistence middleware. No backend, no login,
@@ -226,7 +226,7 @@ const projectData = {
         </li>
         <li class="flex items-start gap-4">
           <span class="text-yellow-600 text-xl mt-1 flex-shrink-0">→</span>
-          <span class="text-stone-300 font-lato text-lg">
+          <span class="type-body-lg text-stone-300">
             <strong class="text-stone-100">State architecture.</strong> A single Zustand
             store composed of six domain slices — muscles, exercises, workouts, sessions,
             settings, and UI. Each slice owns its data and actions. The persistence
@@ -236,7 +236,7 @@ const projectData = {
         </li>
         <li class="flex items-start gap-4">
           <span class="text-yellow-600 text-xl mt-1 flex-shrink-0">→</span>
-          <span class="text-stone-300 font-lato text-lg">
+          <span class="type-body-lg text-stone-300">
             <strong class="text-stone-100">Session recovery.</strong> If the app closes
             mid-workout — phone dies, browser crashes — the active session persists.
             Reopen the app, tap "Continue Session," pick up exactly where you left
@@ -249,7 +249,7 @@ const projectData = {
     <!-- Stack Summary -->
     <div class="mb-20">
       <h2
-        class="text-2xl md:text-3xl font-raleway font-light text-stone-100 mb-8"
+        class="type-section-title text-stone-100 mb-8"
       >
         Stack Summary
       </h2>
@@ -270,10 +270,10 @@ const projectData = {
             { layer: "Testing", choice: "Vitest + Testing Library" },
           ].map((row) => (
             <div class="flex items-baseline gap-3 py-2 border-b border-stone-800">
-              <span class="text-stone-400 text-sm font-lato uppercase tracking-widest w-28 flex-shrink-0">
+              <span class="type-label text-stone-400 w-28 flex-shrink-0">
                 {row.layer}
               </span>
-              <span class="text-stone-200 font-lato">{row.choice}</span>
+              <span class="type-body text-stone-200">{row.choice}</span>
             </div>
           ))
         }
@@ -286,7 +286,7 @@ const projectData = {
     >
       <div>
         <h3
-          class="text-stone-400 text-xs font-lato uppercase tracking-widest mb-4"
+          class="type-label text-stone-400 mb-4"
         >
           Links
         </h3>
@@ -295,7 +295,7 @@ const projectData = {
             href={projectData.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="px-6 py-2 border border-yellow-600 text-yellow-400 text-sm font-lato uppercase tracking-wider hover:bg-yellow-600/10 transition-colors duration-300"
+            class="type-action px-6 py-2 border border-yellow-600 text-yellow-400 hover:bg-yellow-600/10 transition-colors duration-300"
           >
             Live Site
           </a>
@@ -303,13 +303,13 @@ const projectData = {
             href={projectData.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="px-6 py-2 border border-yellow-600 text-yellow-400 text-sm font-lato uppercase tracking-wider hover:bg-yellow-600/10 transition-colors duration-300"
+            class="type-action px-6 py-2 border border-yellow-600 text-yellow-400 hover:bg-yellow-600/10 transition-colors duration-300"
           >
             View Code
           </a>
           <a
             href="/"
-            class="px-6 py-2 border border-stone-500 text-stone-300 text-sm font-lato uppercase tracking-wider hover:bg-stone-800 transition-colors duration-300"
+            class="type-action px-6 py-2 border border-stone-500 text-stone-300 hover:bg-stone-800 transition-colors duration-300"
           >
             ← Back to Home
           </a>
@@ -319,5 +319,5 @@ const projectData = {
   </div>
 
   <!-- Footer -->
-  <Footer />
+  <Footer theme="dark" />
 </section>

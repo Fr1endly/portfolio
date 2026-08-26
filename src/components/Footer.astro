@@ -1,14 +1,24 @@
-<footer class="w-full bg-transparent border-t border-black">
+---
+interface Props {
+  theme?: "light" | "dark";
+}
+
+const { theme = "light" } = Astro.props;
+const foreground = theme === "dark" ? "text-stone-200" : "text-black";
+const border = theme === "dark" ? "border-stone-700" : "border-black";
+---
+
+<footer class:list={["w-full bg-transparent", foreground]}>
   <div class="max-w-6xl mx-auto px-6 py-3">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
       <!-- Email Section -->
       <div class="text-center md:text-left">
-        <h3 class="text-black text-sm font-raleway uppercase tracking-wider mb-2">
+        <h3 class="type-label mb-2">
           Get in touch
         </h3>
         <a
           href="mailto:gizatulinso@gmail.com"
-          class="text-black text-lg md:text-xl font-lato hover:opacity-60 transition-opacity duration-300"
+          class="type-subheading hover:opacity-60 transition-opacity duration-300"
         >
           gizatulinso@gmail.com
         </a>
@@ -16,7 +26,7 @@
 
       <!-- Social Links -->
       <div class="flex items-center gap-6">
-        <h3 class="text-black text-sm font-raleway uppercase tracking-wider">
+        <h3 class="type-label">
           Follow
         </h3>
         <div class="flex gap-4">
@@ -25,7 +35,7 @@
             href="https://github.com/fr1endly"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-black hover:opacity-60 transition-opacity duration-300"
+            class="hover:opacity-60 transition-opacity duration-300"
             aria-label="GitHub"
           >
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -40,7 +50,7 @@
             href="https://www.linkedin.com/in/oskars-gizatulins"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-black hover:opacity-60 transition-opacity duration-300"
+            class="hover:opacity-60 transition-opacity duration-300"
             aria-label="LinkedIn"
           >
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -54,8 +64,8 @@
     </div>
 
     <!-- Copyright -->
-    <div class="mt-4 pt-4 md:mt-8 md:pt-8 border-t border-black text-center">
-      <p class="text-black text-sm font-lato">
+    <div class:list={["mt-4 pt-4 md:mt-8 md:pt-8 border-t text-center", border]}>
+      <p class="type-meta">
         © {new Date().getFullYear()} Oscar Gizatulin. All rights reserved.
       </p>
     </div>

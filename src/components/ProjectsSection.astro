@@ -38,7 +38,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
 
 <section
   id="projects"
-  class="projects-carousel h-[120svh]"
+  class="projects-carousel "
   aria-labelledby="projects-heading"
   data-project-carousel
 >
@@ -203,7 +203,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
   }
 
   .projects-carousel__stage {
-    --carousel-center-x: 35%;
+    --carousel-center-x: 50%;
     --carousel-radius-x: 20rem;
     --carousel-radius-y: 22.85rem;
     position: absolute;
@@ -236,20 +236,20 @@ const projects = [...featuredProjects, ...placeholderProjects];
 
   .projects-carousel__intro p,
   .projects-carousel__intro span {
-    font-family: "Lato", sans-serif;
-    font-size: 0.64rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
     font-weight: 700;
-    line-height: 1;
+    line-height: 1.25;
+    letter-spacing: 0;
     text-transform: uppercase;
   }
 
   .projects-carousel__intro h2 {
-    font-family: "Raleway", sans-serif;
-    font-size: clamp(3rem, 7vw, 7rem);
-    font-weight: 650;
-    line-height: 0.82;
+    font-family: var(--font-display);
+    font-size: 5.5rem;
+    font-weight: 600;
+    line-height: 0.9;
     letter-spacing: 0;
-    text-transform: uppercase;
   }
 
   .projects-carousel__intro span {
@@ -336,11 +336,11 @@ const projects = [...featuredProjects, ...placeholderProjects];
       linear-gradient(to bottom, transparent 45%, rgba(10, 10, 10, 0.76)),
       color-mix(in srgb, var(--project-accent) 60%, #f3ebe6);
     color: color-mix(in srgb, var(--project-accent) 25%, #fff);
-    font-family: "Raleway", sans-serif;
-    font-size: clamp(3rem, 7vw, 5rem);
-    font-weight: 650;
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 600;
     line-height: 1;
-    text-transform: uppercase;
+    letter-spacing: 0;
   }
 
   .project-card:hover .project-card__image img,
@@ -365,21 +365,21 @@ const projects = [...featuredProjects, ...placeholderProjects];
 
   .project-card__number,
   .project-card__meta {
-    font-family: "Lato", sans-serif;
-    font-size: 0.61rem;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.25;
+    letter-spacing: 0;
     text-transform: uppercase;
   }
 
   .project-card h3 {
     max-width: 12ch;
-    font-family: "Raleway", sans-serif;
-    font-size: clamp(1.15rem, 2vw, 1.65rem);
-    font-weight: 650;
-    line-height: 0.95;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.05;
     letter-spacing: 0;
-    text-transform: uppercase;
   }
 
   .project-card__meta {
@@ -423,12 +423,12 @@ const projects = [...featuredProjects, ...placeholderProjects];
     }
 
     .projects-carousel__intro h2 {
-      font-size: clamp(2.15rem, 12vw, 3.5rem);
+      font-size: 3rem;
     }
 
     .projects-carousel__intro span {
       margin-top: 0.75rem;
-      font-size: 0.52rem;
+      font-size: 0.625rem;
     }
 
     .projects-carousel__item {
@@ -441,7 +441,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
     }
 
     .project-card__placeholder {
-      font-size: 3rem;
+      font-size: 2.75rem;
     }
 
     .project-card__details {
@@ -452,11 +452,11 @@ const projects = [...featuredProjects, ...placeholderProjects];
       gap: 0.4rem;
       margin-top: 0.55rem;
       padding-top: 0.45rem;
-      font-size: 0.52rem;
+      font-size: 0.625rem;
     }
 
     .project-card h3 {
-      font-size: 1.1rem;
+      font-size: 1.125rem;
     }
   }
 

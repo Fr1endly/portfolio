@@ -46,7 +46,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
     <div class="projects-carousel__intro">
       <p>Selected</p>
       <h2 id="projects-heading">Work</h2>
-      <span>2024 / 2025</span>
+      <span>2024 / 2026</span>
     </div>
 
     <div class="projects-carousel__path" aria-hidden="true"></div>
@@ -211,8 +211,8 @@ const projects = [...featuredProjects, ...placeholderProjects];
   .projects-carousel {
     position: relative;
     width: 100%;
-    min-height: 100svh;
-    overflow: hidden;
+    min-height: 90svh;
+    overflow: visible;
     color: #121212;
     pointer-events: auto;
   }
@@ -226,7 +226,8 @@ const projects = [...featuredProjects, ...placeholderProjects];
   }
 
   .projects-carousel__stage {
-    --carousel-center-x: 50%;
+    --carousel-center-x: 51%;
+    --carousel-center-y: 57%;
     --carousel-radius-x: 18rem;
     --carousel-radius-y: 20rem;
     --carousel-radius-scale: 1.45;
@@ -240,7 +241,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
 
   .projects-carousel__path {
     position: absolute;
-    top: 50%;
+    top: var(--carousel-center-y);
     left: var(--carousel-center-x);
     width: calc(var(--carousel-radius-x) * 2);
     height: calc(var(--carousel-radius-y) * 2);
@@ -252,7 +253,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
 
   .projects-carousel__intro {
     position: absolute;
-    top: 50%;
+    top: var(--carousel-center-y);
     left: var(--carousel-center-x);
     z-index: 1;
     width: min(34vw, 24rem);
@@ -289,7 +290,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
     --carousel-y: 0px;
     --carousel-scale: 1;
     position: absolute;
-    top: 50%;
+    top: var(--carousel-center-y);
     left: var(--carousel-center-x);
     width: clamp(12.5rem, 19vw, 17rem);
     transform: translate3d(

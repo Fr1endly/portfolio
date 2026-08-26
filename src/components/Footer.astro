@@ -8,27 +8,24 @@ const foreground = theme === "dark" ? "text-stone-200" : "text-black";
 const border = theme === "dark" ? "border-stone-700" : "border-black";
 ---
 
-<footer class:list={["w-full bg-transparent", foreground]}>
-  <div class="max-w-6xl mx-auto px-6 py-3">
+<footer class:list={["w-full flex justify-end bg-transparent", foreground]}>
+  <div class="max-w-6xl  px-6 py-3">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
       <!-- Email Section -->
       <div class="text-center md:text-left">
-        <h3 class="type-label mb-2">
-          Get in touch
+        <h3 class="type-label">
+            <a
+              href="mailto:gizatulinso@gmail.com"
+              class="type-label hover:opacity-60 transition-opacity duration-300"
+            >
+                Get in touch
+            </a>
         </h3>
-        <a
-          href="mailto:gizatulinso@gmail.com"
-          class="type-subheading hover:opacity-60 transition-opacity duration-300"
-        >
-          gizatulinso@gmail.com
-        </a>
+
       </div>
 
       <!-- Social Links -->
       <div class="flex items-center gap-6">
-        <h3 class="type-label">
-          Follow
-        </h3>
         <div class="flex gap-4">
           <!-- GitHub -->
           <a
@@ -64,7 +61,7 @@ const border = theme === "dark" ? "border-stone-700" : "border-black";
     </div>
 
     <!-- Copyright -->
-    <div class:list={["mt-4 pt-4 md:mt-8 md:pt-8 border-t text-center", border]}>
+    <div class:list={["mt-4 pt-4 text-center"]}>
       <p class="type-meta">
         © {new Date().getFullYear()} Oscar Gizatulin. All rights reserved.
       </p>

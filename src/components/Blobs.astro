@@ -1,14 +1,4 @@
----
-import ProjectsSection from "./ProjectsSection.astro";
-
-const { className = "", heightClass = "h-svh" } = Astro.props;
----
-
-<div
-  class={`relative isolate w-full ${heightClass} overflow-hidden ${className}`}
->
-  <!-- Layer 1: Animated Gradient Background -->
-  <div id="layer-1" class="absolute inset-0 bg-blue-200/90">
+<div class="absolute inset-0 -z-10 overflow-hidden bg-blue-200/90" aria-hidden="true">
     <svg xmlns="http://www.w3.org/2000/svg" class="fixed inset-0 w-0 h-0">
       <defs>
         <filter id="goo-image">
@@ -24,8 +14,8 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
       </defs>
     </svg>
     <div class="w-full h-full filter-[url(#goo-image)_blur(45px)] overflow-visible">
-      <div class="absolute top-[37%] left-[75%] aspect-square w-[min(84vw,68rem)] transform-[translate(-50%,-50%)] will-change-[translate] max-[767px]:w-[min(112vw,34rem)] motion-reduce:translate-x-0 motion-reduce:translate-y-0" data-blob-field data-orbit aria-hidden="true">
-        <div class="absolute inset-0 h-[160%] w-[140%] overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(249,202,217,1)_0,rgba(249,202,217,0.5)_100%)] opacity-100 mix-blend-hard-light motion-reduce:rounded-[48%_52%_46%_54%/52%_46%_54%_48%]" data-main-blob>
+      <div class="absolute top-[45%] left-[75%] aspect-square w-[min(84vw,68rem)] transform-[translate(-50%,-50%)] will-change-[translate] max-[767px]:w-[min(112vw,34rem)] motion-reduce:translate-x-0 motion-reduce:translate-y-0" data-blob-field data-orbit aria-hidden="true">
+        <div class="absolute inset-0 h-[120%] w-[140%] overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(249,202,217,1)_0,rgba(249,202,217,0.5)_100%)] opacity-100 mix-blend-hard-light motion-reduce:rounded-[48%_52%_46%_54%/52%_46%_54%_48%]" data-main-blob>
           <div class="absolute top-[50%] left-[45%] h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(78,255,239,0.4)_0,rgba(78,255,239,0.3)_100%)] opacity-100 mix-blend-hard-light will-change-transform motion-reduce:transform-[translate3d(-28%,-32%,0)]" data-roaming-blob data-breathe-min="0.95" data-breathe-max="1.06" data-breathe-duration="7600" data-breathe-delay="-1800"></div>
           <div class="absolute top-[50%] left-[45%] h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(78,255,239,0.4)_0,rgba(78,255,239,0.3)_100%)] opacity-100 mix-blend-hard-light will-change-transform motion-reduce:transform-[translate3d(42%,-12%,0)]" data-roaming-blob data-breathe-min="0.96" data-breathe-max="1.05" data-breathe-duration="9200" data-breathe-delay="-4100"></div>
           <div class="absolute top-[50%] left-[45%] h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-[radial-gradient(circle_at_center,rgba(109,114,195,0.4)_0,rgba(109,114,195,0.2)_50%)] opacity-100 mix-blend-hard-light will-change-transform motion-reduce:transform-[translate3d(105%,100%,0)]" data-roaming-blob data-breathe-min="0.94" data-breathe-max="1.07" data-breathe-duration="8400" data-breathe-delay="-5200"></div>
@@ -33,37 +23,6 @@ const { className = "", heightClass = "h-svh" } = Astro.props;
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Layer 3: Page content (no blend mode - normal colors) -->
-  <div
-    id="layer-3"
-    class="relative pointer-events-none"
-  >
-    <section class="h-[65svh] flex flex-col justify-start items-start">
-      <div class="pointer-events-auto px-6 py-8 md:px-10 md:py-14">
-        <h1
-          class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-neutral-950 font-light uppercase font-raleway tracking-tight"
-        >
-          Oscar Gizatulin
-        </h1>
-        <p
-          class="pl-1 text-lg sm:text-xl text-neutral-800 max-w-2xl tracking-wide font-lato"
-        >
-          Welcome to my portfolio. Explore my work and get in touch.
-        </p>
-      </div>
-    </section>
-
-    <ProjectsSection />
-  </div>
-  <a
-    href="#projects"
-    aria-label="Scroll to selected projects"
-    class="absolute top-[calc(100svh-4rem)] left-1/2 z-10 -translate-x-1/2 pointer-events-auto"
-  >
-    <img src="/images/arrow.svg" alt="" aria-hidden="true" class="w-8 h-8 animate-bounce" />
-  </a>
 </div>
 
 <script>

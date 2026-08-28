@@ -192,6 +192,12 @@ h3 {
   --case-accent-text: #754600;
 }
 
+.case-study[data-project="inspirit-lactation"] {
+  --case-accent: #b55c4f;
+  --case-accent-foreground: #ffffff;
+  --case-accent-text: #8c382e;
+}
+
 .case-study .text-stone-100,
 .case-study .text-stone-200 {
   color: var(--portfolio-ink);

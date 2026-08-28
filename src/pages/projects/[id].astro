@@ -3,19 +3,22 @@ import Layout from "../../layouts/Layout.astro";
 import SbsProject from "../../components/projects/SbsProject.astro";
 import RdProject from "../../components/projects/RdProject.astro";
 import PortfolioProject from "../../components/projects/PortfolioProject.astro";
+import InspiritProject from "../../components/projects/InspiritProject.astro";
 
 export function getStaticPaths() {
   return [
     { params: { id: 'sbs' } },
     { params: { id: 'rd' } },
-    { params: { id: 'portfolio' } }
+    { params: { id: 'portfolio' } },
+    { params: { id: 'inspirit-lactation' } }
   ];
 }
 
 const projectComponents = {
   'sbs': SbsProject,
   'rd': RdProject,
-  'portfolio': PortfolioProject
+  'portfolio': PortfolioProject,
+  'inspirit-lactation': InspiritProject
 };
 
 const projectMetadata = {
@@ -33,6 +36,11 @@ const projectMetadata = {
     title: 'Portfolio Website - Oscar Gizatulin',
     description: 'A responsive creative portfolio built with Astro, TypeScript, Tailwind CSS, and a custom animated project carousel',
     keywords: 'Oscar Gizatulin, portfolio website, Astro, TypeScript, Tailwind CSS, front-end development, web design'
+  },
+  'inspirit-lactation': {
+    title: 'Inspirit Lactation Website - Oscar Gizatulin Portfolio',
+    description: 'A calm, responsive website for an IBCLC practice with Stripe payments and Cal.com appointment scheduling',
+    keywords: 'Inspirit Lactation, IBCLC website, healthcare web design, Astro, Tailwind CSS, Stripe, Cal.com, appointment scheduling, portfolio'
   }
 };
 

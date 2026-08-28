@@ -2,34 +2,42 @@
 import Footer from "../Footer.astro";
 
 const projectData = {
-  id: "portfolio",
-  title: "Portfolio Website",
+  id: "inspirit-lactation",
+  title: "Inspirit Lactation",
   description:
-    "A focused portfolio for presenting selected design and front-end work through a compact, expressive browsing experience.",
+    "A calm, approachable website for an IBCLC practice, bringing services, prenatal classes, evidence-based resources, and appointment booking into one clear experience.",
   year: "2026",
   role: "UX/UI Design, Front-End Development",
-  type: "Creative Portfolio",
-  technologies: ["Astro 5", "TypeScript", "Tailwind CSS v4", "CSS Animation"],
+  type: "Healthcare Services Website",
+  technologies: [
+    "Astro",
+    "Tailwind CSS",
+    "Stripe",
+    "Cal.com",
+    "Responsive Design",
+    "CSS Animation",
+  ],
   image: {
-    src: "/images/design/portfolio-homepage-full.png",
-    alt: "Full homepage of Oscar Gizatulin's portfolio website",
+    src: "/images/design/mary-see-homepage-full.png",
+    alt: "Full homepage of the Inspirit Lactation website",
   },
-  liveUrl: "/",
-  githubUrl: "https://github.com/Fr1endly/portfolio",
+  liveUrl: "https://www.maryseeibclc.com/",
 };
 
 const stack = [
-  { layer: "Framework", choice: "Astro 5 + TypeScript" },
-  { layer: "Styling", choice: "Tailwind CSS v4 + scoped CSS" },
-  { layer: "Typography", choice: "Raleway + Lato" },
-  { layer: "Motion", choice: "CSS transforms + requestAnimationFrame" },
+  { layer: "Framework", choice: "Astro" },
+  { layer: "Styling", choice: "Tailwind CSS" },
+  { layer: "Scheduling", choice: "Cal.com" },
+  { layer: "Payments", choice: "Stripe" },
+  { layer: "Typography", choice: "Cormorant Garamond + Jost" },
+  { layer: "Motion", choice: "CSS transitions + Intersection Observer" },
   { layer: "Rendering", choice: "Static site generation" },
 ];
 ---
 
 <section
   class="case-study relative w-full min-h-screen pt-8 px-4 md:px-6"
-  data-project="portfolio"
+  data-project="inspirit-lactation"
 >
   <div class="max-w-5xl mx-auto">
     <header class="mb-16 md:mb-24">
@@ -66,21 +74,17 @@ const stack = [
     <div class="mb-20">
       <h2 class="type-section-title text-stone-100 mb-8">Project Gallery</h2>
       <div class="case-study__media relative">
-        <img
-          src={projectData.image.src}
-          alt={projectData.image.alt}
-          class="block w-full h-auto"
-        />
+        <img src={projectData.image.src} alt={projectData.image.alt} class="block w-full h-auto" />
       </div>
     </div>
 
     <div class="mb-20">
       <h2 class="type-section-title text-stone-100 mb-6">The Goal</h2>
       <p class="type-body-lg text-stone-300 max-w-3xl">
-        The portfolio needed to communicate both design judgment and technical
-        ability without turning into a conventional grid of identical cards.
-        It also needed to keep every project visible and easy to reach on a
-        single, responsive homepage.
+        Families looking for feeding support are often navigating a stressful,
+        time-sensitive moment. The site needed to quickly establish trust,
+        explain the available support, and provide a clear path from learning
+        about the practice to booking an appointment.
       </p>
     </div>
 
@@ -88,27 +92,27 @@ const stack = [
       <h2 class="type-section-title text-stone-100 mb-8">Design Direction</h2>
       <div class="space-y-10">
         <div>
-          <h3 class="type-subheading text-stone-100 mb-3">Editorial Scale</h3>
+          <h3 class="type-subheading text-stone-100 mb-3">Calm and Reassuring</h3>
           <p class="type-body text-stone-300 max-w-3xl">
-            Oversized typography establishes identity immediately, while small
-            technical labels and restrained project metadata keep the interface
-            precise and easy to scan.
+            Soft neutral surfaces, warm photography, and restrained sage and
+            blush accents create a supportive tone without making the interface
+            feel overly clinical.
           </p>
         </div>
         <div>
-          <h3 class="type-subheading text-stone-100 mb-3">Orbital Project Navigation</h3>
+          <h3 class="type-subheading text-stone-100 mb-3">Editorial Typography</h3>
           <p class="type-body text-stone-300 max-w-3xl">
-            Projects move around a tilted elliptical path, turning the work
-            index into the primary visual interaction. Hover and keyboard focus
-            pause the motion so every case study remains accessible.
+            Cormorant Garamond gives headings a personal, established character,
+            while Jost keeps navigation, service details, and calls to action
+            clear at every screen size.
           </p>
         </div>
         <div>
-          <h3 class="type-subheading text-stone-100 mb-3">Responsive Composition</h3>
+          <h3 class="type-subheading text-stone-100 mb-3">Guided Next Steps</h3>
           <p class="type-body text-stone-300 max-w-3xl">
-            The layout recalculates the carousel radius and card scale for each
-            viewport, preserving the composition from compact mobile screens to
-            wide desktop displays.
+            Services, classes, resources, and booking are separated into direct
+            pathways so visitors can act without searching through dense
+            informational content.
           </p>
         </div>
       </div>
@@ -120,25 +124,33 @@ const stack = [
         <li class="flex items-start gap-4">
           <span class="case-study__bullet text-xl mt-1 flex-shrink-0">→</span>
           <span class="type-body-lg text-stone-300">
-            <strong class="text-stone-100">Static-first delivery.</strong> Astro
-            generates each route as static HTML for a fast initial render with
-            minimal client-side JavaScript.
+            <strong class="text-stone-100">Static-first architecture.</strong>
+            Astro delivers pre-rendered pages with a small client-side footprint
+            for quick access on mobile connections.
           </span>
         </li>
         <li class="flex items-start gap-4">
           <span class="case-study__bullet text-xl mt-1 flex-shrink-0">→</span>
           <span class="type-body-lg text-stone-300">
-            <strong class="text-stone-100">Purpose-built motion.</strong> The
-            carousel uses requestAnimationFrame and CSS custom properties to
-            calculate position, depth, and scale without a motion dependency.
+            <strong class="text-stone-100">Scheduling and payments.</strong>
+            Cal.com provides the appointment-scheduling flow, while Stripe
+            handles online payments as part of the booking experience.
           </span>
         </li>
         <li class="flex items-start gap-4">
           <span class="case-study__bullet text-xl mt-1 flex-shrink-0">→</span>
           <span class="type-body-lg text-stone-300">
-            <strong class="text-stone-100">Accessible interaction.</strong>
-            Reduced-motion preferences, focus states, semantic labels, and
-            pause behavior are built into the project navigation.
+            <strong class="text-stone-100">Responsive service navigation.</strong>
+            A compact mobile menu and fluid content grids keep the main booking
+            and resource paths accessible across screen sizes.
+          </span>
+        </li>
+        <li class="flex items-start gap-4">
+          <span class="case-study__bullet text-xl mt-1 flex-shrink-0">→</span>
+          <span class="type-body-lg text-stone-300">
+            <strong class="text-stone-100">Progressive content reveals.</strong>
+            Intersection Observer activates lightweight section transitions as
+            content enters the viewport.
           </span>
         </li>
       </ul>
@@ -160,11 +172,8 @@ const stack = [
       <div>
         <h2 class="type-label text-stone-400 mb-4">Links</h2>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href={projectData.liveUrl} class="case-study__action case-study__action--primary type-action px-6 py-2 border transition-colors duration-300">
+          <a href={projectData.liveUrl} target="_blank" rel="noopener noreferrer" class="case-study__action case-study__action--primary type-action px-6 py-2 border transition-colors duration-300">
             Live Site
-          </a>
-          <a href={projectData.githubUrl} target="_blank" rel="noopener noreferrer" class="case-study__action case-study__action--primary type-action px-6 py-2 border transition-colors duration-300">
-            View Code
           </a>
           <a href="/" class="case-study__action type-action px-6 py-2 border transition-colors duration-300">
             ← Back to Home

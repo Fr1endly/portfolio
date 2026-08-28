@@ -9,6 +9,8 @@ const featuredProjects = [
     image: "/images/design/sbs-homepage.png",
     imageAlt: "Side by Side website interface",
     accent: "#2f6edb",
+    imageFit: "cover",
+    imageBackground: "#eee8e4",
   },
   {
     id: "rd",
@@ -19,6 +21,8 @@ const featuredProjects = [
     image: "/images/design/rd-homepage.png",
     imageAlt: "Resistance Diary mobile app interface",
     accent: "#ffad27",
+    imageFit: "cover",
+    imageBackground: "#eee8e4",
   },
   {
     id: "portfolio",
@@ -29,6 +33,20 @@ const featuredProjects = [
     image: "/images/design/portfolio-homepage-cover.png",
     imageAlt: "Oscar Gizatulin portfolio website interface",
     accent: "#2f6edb",
+    imageFit: "contain",
+    imageBackground: "#adc8e8",
+  },
+  {
+    id: "inspirit-lactation",
+    number: "04",
+    title: "Inspirit Lactation",
+    type: "Healthcare website",
+    year: "2026",
+    image: "/images/design/mary-see-homepage-cover.png",
+    imageAlt: "Inspirit Lactation website interface",
+    accent: "#b55c4f",
+    imageFit: "contain",
+    imageBackground: "#faf7f1",
   },
 ];
 
@@ -59,7 +77,7 @@ const projects = featuredProjects;
           <a
             class="project-card"
             href={project.image ? `/projects/${project.id}` : "mailto:gizatulinso@gmail.com?subject=Project%20inquiry"}
-            style={`--project-accent: ${project.accent}`}
+            style={`--project-accent: ${project.accent}; --project-image-background: ${project.imageBackground}`}
             aria-label={project.image ? `View ${project.title} case study` : "Get in touch about your project"}
           >
             {
@@ -67,7 +85,7 @@ const projects = featuredProjects;
                 <div
                   class:list={[
                     "project-card__image",
-                    project.id === "portfolio" && "project-card__image--contain",
+                    project.imageFit === "contain" && "project-card__image--contain",
                   ]}
                 >
                   <img src={project.image} alt={project.imageAlt} loading="lazy" />
@@ -215,7 +233,7 @@ const projects = featuredProjects;
   .projects-carousel {
     position: relative;
     width: 100%;
-    min-height: 90svh;
+    min-height: max(90svh, 40rem);
     overflow: visible;
     color: #121212;
     pointer-events: auto;
@@ -230,11 +248,11 @@ const projects = featuredProjects;
   }
 
   .projects-carousel__stage {
-    --carousel-center-x: 68%;
+    --carousel-center-x: 63%;
     --carousel-center-y: 57%;
     --carousel-radius-x: 18rem;
     --carousel-radius-y: 20rem;
-    --carousel-radius-scale: 1.43;
+    --carousel-radius-scale: 1.15;
     --carousel-card-scale: 0.8;
     --carousel-tilt: 10deg;
     position: absolute;
@@ -364,7 +382,7 @@ const projects = featuredProjects;
 
   .project-card__image--contain img {
     object-fit: contain;
-    background-color: var(--portfolio-canvas);
+    background-color: var(--project-image-background, var(--portfolio-canvas));
   }
 
   .project-card__placeholder {
@@ -454,6 +472,7 @@ const projects = featuredProjects;
 
     .projects-carousel__stage {
       --carousel-center-x: 50%;
+      --carousel-radius-scale: 1.43;
       inset: 3.25rem 0.5rem 1rem;
       min-height: 37rem;
     }

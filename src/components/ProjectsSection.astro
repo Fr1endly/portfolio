@@ -167,7 +167,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
       previousTime = time;
 
       if (!isCardActive && isVisible && !motionPreference.matches) {
-        angle += elapsed * 0.000055;
+        angle += elapsed * 0.0001;
         positionItems();
       }
 
@@ -232,7 +232,7 @@ const projects = [...featuredProjects, ...placeholderProjects];
     --carousel-radius-y: 20rem;
     --carousel-radius-scale: 1.43;
     --carousel-card-scale: 0.8;
-    --carousel-tilt: -37deg;
+    --carousel-tilt: 10deg;
     position: absolute;
     inset: clamp(3.5rem, 7vh, 5rem) clamp(0.75rem, 3vw, 2.5rem) clamp(2rem, 4vh, 3rem);
     min-height: 34rem;
@@ -247,7 +247,10 @@ const projects = [...featuredProjects, ...placeholderProjects];
     height: calc(var(--carousel-radius-y) * 2);
     translate: -50% -50%;
     rotate: var(--carousel-tilt);
-    border: 1px solid rgba(18, 18, 18, 0.2);
+    /*border: 1px solid rgba(18, 18, 18, 0.2);*/
+    border-bottom:1px solid rgba(18, 18, 18, 0.2);
+    /*border-left:1px solid rgba(18, 18, 18, 0.2);
+    border-right: 1px solid rgba(18, 18, 18, 0.2);*/
     border-radius: 50%;
   }
 

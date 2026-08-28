@@ -40,32 +40,27 @@ const projectData = {
 ---
 
 <section
-  class="case-study relative w-full min-h-screen bg-stone-900 pt-8 pb-16 px-4 md:px-6"
+  class="case-study relative w-full min-h-screen pt-8 pb-16 px-4 md:px-6"
+  data-project="rd"
 >
-  <!-- Decorative Corner -->
-  <div
-    class="absolute w-10 h-10 -left-10 top-0 border-white border-t-4 border-l-4 rounded-sm"
-  >
-  </div>
-
   <div class="max-w-5xl mx-auto">
     <!-- Header Section -->
     <div class="mb-16 md:mb-24">
       <div class="flex flex-wrap items-center gap-3 mb-6">
         <span
-          class="type-label inline-block px-3 py-1 border border-yellow-600 text-yellow-400"
+          class="case-study__tag case-study__tag--accent type-label inline-block px-3 py-1 border"
         >
           {projectData.id}
         </span>
         <span
-          class="type-label inline-block px-3 py-1 border border-stone-600 text-stone-400"
+          class="case-study__tag type-label inline-block px-3 py-1 border"
         >
           {projectData.type}
         </span>
       </div>
 
       <h1
-        class="type-case-title text-stone-100 mb-6"
+        class="type-display text-stone-100 mb-6"
       >
         {projectData.title}
       </h1>
@@ -130,11 +125,11 @@ const projectData = {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           projectData.images.map((image) => (
-            <div class="relative">
+            <div class="case-study__media relative">
               <img
                 src={image.src}
                 alt={image.alt}
-                class="w-full h-120 object-contain hover:scale-105 transition-transform duration-500"
+                class="block w-full h-120 object-contain hover:scale-105 transition-transform duration-500"
               />
             </div>
           ))
@@ -216,7 +211,7 @@ const projectData = {
 
       <ul class="space-y-4">
         <li class="flex items-start gap-4">
-          <span class="text-yellow-600 text-xl mt-1 flex-shrink-0">→</span>
+          <span class="case-study__bullet text-xl mt-1 flex-shrink-0">→</span>
           <span class="type-body-lg text-stone-300">
             <strong class="text-stone-100">Offline-first architecture.</strong> The
             entire app runs as a PWA with Workbox service workers. All data lives
@@ -225,7 +220,7 @@ const projectData = {
           </span>
         </li>
         <li class="flex items-start gap-4">
-          <span class="text-yellow-600 text-xl mt-1 flex-shrink-0">→</span>
+          <span class="case-study__bullet text-xl mt-1 flex-shrink-0">→</span>
           <span class="type-body-lg text-stone-300">
             <strong class="text-stone-100">State architecture.</strong> A single Zustand
             store composed of six domain slices — muscles, exercises, workouts, sessions,
@@ -235,7 +230,7 @@ const projectData = {
           </span>
         </li>
         <li class="flex items-start gap-4">
-          <span class="text-yellow-600 text-xl mt-1 flex-shrink-0">→</span>
+          <span class="case-study__bullet text-xl mt-1 flex-shrink-0">→</span>
           <span class="type-body-lg text-stone-300">
             <strong class="text-stone-100">Session recovery.</strong> If the app closes
             mid-workout — phone dies, browser crashes — the active session persists.
@@ -295,7 +290,7 @@ const projectData = {
             href={projectData.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="type-action px-6 py-2 border border-yellow-600 text-yellow-400 hover:bg-yellow-600/10 transition-colors duration-300"
+            class="case-study__action case-study__action--primary type-action px-6 py-2 border transition-colors duration-300"
           >
             Live Site
           </a>
@@ -303,13 +298,13 @@ const projectData = {
             href={projectData.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="type-action px-6 py-2 border border-yellow-600 text-yellow-400 hover:bg-yellow-600/10 transition-colors duration-300"
+            class="case-study__action case-study__action--primary type-action px-6 py-2 border transition-colors duration-300"
           >
             View Code
           </a>
           <a
             href="/"
-            class="type-action px-6 py-2 border border-stone-500 text-stone-300 hover:bg-stone-800 transition-colors duration-300"
+            class="case-study__action type-action px-6 py-2 border transition-colors duration-300"
           >
             ← Back to Home
           </a>
@@ -319,5 +314,5 @@ const projectData = {
   </div>
 
   <!-- Footer -->
-  <Footer theme="dark" />
+  <Footer />
 </section>

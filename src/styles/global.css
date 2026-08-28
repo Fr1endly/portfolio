@@ -36,6 +36,13 @@
 :root {
   --font-display: "Raleway", sans-serif;
   --font-body: "Lato", sans-serif;
+  --portfolio-canvas: #adc8e8;
+  --portfolio-ink: #121212;
+  --portfolio-muted: #404040;
+  --portfolio-soft: #eee8e4;
+  --portfolio-line: rgba(18, 18, 18, 0.22);
+  --portfolio-blue: #2f6edb;
+  --portfolio-amber: #ffad27;
 }
 
 html {
@@ -169,4 +176,88 @@ h3 {
   .type-body-lg {
     font-size: 1.125rem;
   }
+}
+
+.case-study {
+  --case-accent: var(--portfolio-blue);
+  --case-accent-foreground: #ffffff;
+  --case-accent-text: #1753ad;
+  background-color: var(--portfolio-canvas);
+  color: var(--portfolio-ink);
+}
+
+.case-study[data-project="rd"] {
+  --case-accent: var(--portfolio-amber);
+  --case-accent-foreground: var(--portfolio-ink);
+  --case-accent-text: #754600;
+}
+
+.case-study .text-stone-100,
+.case-study .text-stone-200 {
+  color: var(--portfolio-ink);
+}
+
+.case-study .text-stone-300 {
+  color: var(--portfolio-muted);
+}
+
+.case-study .text-stone-400 {
+  color: #525252;
+}
+
+.case-study .border-stone-800,
+.case-study .border-stone-700,
+.case-study .border-stone-600,
+.case-study .border-stone-500 {
+  border-color: var(--portfolio-line);
+}
+
+.case-study__tag {
+  border-color: var(--portfolio-line);
+  color: var(--portfolio-muted);
+}
+
+.case-study__tag--accent {
+  background-color: var(--case-accent);
+  border-color: var(--case-accent);
+  color: var(--case-accent-foreground);
+}
+
+.case-study__media {
+  overflow: hidden;
+  border: 1px solid var(--portfolio-line);
+  border-radius: 0.35rem;
+  background-color: var(--portfolio-soft);
+  box-shadow: 0 0.75rem 2rem rgba(18, 18, 18, 0.12);
+}
+
+.case-study__bullet {
+  color: var(--case-accent-text);
+}
+
+.case-study__action {
+  border-color: var(--portfolio-ink);
+  color: var(--portfolio-ink);
+  text-decoration: none;
+}
+
+.case-study__action:hover,
+.case-study__action:focus-visible {
+  background-color: rgba(18, 18, 18, 0.07);
+}
+
+.case-study__action--primary {
+  background-color: var(--case-accent);
+  border-color: var(--case-accent);
+  color: var(--case-accent-foreground);
+}
+
+.case-study__action--primary:hover,
+.case-study__action--primary:focus-visible {
+  background-color: color-mix(in srgb, var(--case-accent) 88%, black);
+}
+
+.case-study__action:focus-visible {
+  outline: 3px solid var(--case-accent);
+  outline-offset: 4px;
 }

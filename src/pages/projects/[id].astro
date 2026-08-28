@@ -2,17 +2,20 @@
 import Layout from "../../layouts/Layout.astro";
 import SbsProject from "../../components/projects/SbsProject.astro";
 import RdProject from "../../components/projects/RdProject.astro";
+import PortfolioProject from "../../components/projects/PortfolioProject.astro";
 
 export function getStaticPaths() {
   return [
     { params: { id: 'sbs' } },
-    { params: { id: 'rd' } }
+    { params: { id: 'rd' } },
+    { params: { id: 'portfolio' } }
   ];
 }
 
 const projectComponents = {
   'sbs': SbsProject,
-  'rd': RdProject
+  'rd': RdProject,
+  'portfolio': PortfolioProject
 };
 
 const projectMetadata = {
@@ -25,6 +28,11 @@ const projectMetadata = {
     title: 'Resistance Diary - Oscar Gizatulin Portfolio',
     description: 'A progressive overload training tracker PWA built with React 19, TypeScript, Zustand, and Framer Motion',
     keywords: 'Resistance Diary, Training Tracker, PWA, React 19, TypeScript, Zustand, Tailwind CSS, portfolio'
+  },
+  'portfolio': {
+    title: 'Portfolio Website - Oscar Gizatulin',
+    description: 'A responsive creative portfolio built with Astro, TypeScript, Tailwind CSS, and a custom animated project carousel',
+    keywords: 'Oscar Gizatulin, portfolio website, Astro, TypeScript, Tailwind CSS, front-end development, web design'
   }
 };
 

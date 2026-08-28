@@ -20,20 +20,19 @@ const featuredProjects = [
     imageAlt: "Resistance Diary mobile app interface",
     accent: "#ffad27",
   },
+  {
+    id: "portfolio",
+    number: "03",
+    title: "Portfolio Website",
+    type: "Creative portfolio",
+    year: "2026",
+    image: "/images/design/portfolio-homepage-cover.png",
+    imageAlt: "Oscar Gizatulin portfolio website interface",
+    accent: "#2f6edb",
+  },
 ];
 
-const placeholderProjects = Array.from({ length: 1 }, (_, index) => ({
-  id: `open-${index + 1}`,
-  number: String(index + 3).padStart(2, "0"),
-  title: "Place for your project",
-  type: "Available slot",
-  year: "Let's talk",
-  image: null,
-  imageAlt: "",
-  accent: index % 2 === 0 ? "#2f6edb" : "#ffad27",
-}));
-
-const projects = [...featuredProjects, ...placeholderProjects];
+const projects = featuredProjects;
 ---
 
 <section
@@ -65,7 +64,12 @@ const projects = [...featuredProjects, ...placeholderProjects];
           >
             {
               project.image ? (
-                <div class="project-card__image">
+                <div
+                  class:list={[
+                    "project-card__image",
+                    project.id === "portfolio" && "project-card__image--contain",
+                  ]}
+                >
                   <img src={project.image} alt={project.imageAlt} loading="lazy" />
                 </div>
               ) : (
@@ -356,6 +360,11 @@ const projects = [...featuredProjects, ...placeholderProjects];
     object-fit: cover;
     object-position: top center;
     transition: transform 550ms ease;
+  }
+
+  .project-card__image--contain img {
+    object-fit: contain;
+    background-color: var(--portfolio-canvas);
   }
 
   .project-card__placeholder {
